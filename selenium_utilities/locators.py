@@ -75,7 +75,3 @@ def locate_elements_by_tag_name(locator, tag_name, type, clickable=False):
         return elements
     except TimeoutException:
         print_timeout_statement(type)
-
-
-def switch_to_default_content(browser):
-    browser.switch_to.default_content()
