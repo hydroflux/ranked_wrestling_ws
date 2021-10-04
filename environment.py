@@ -1,10 +1,14 @@
 from selenium_utilities.open import open_url
 
 from settings.driver import create_webdriver
+from settings.general_functions import script_execution
 
-from variables.variables import website, website_title
+from variables.general import website, website_title
+from variables.seasons import seasons
 
-def execute(headless, season):
+def execute(headless, season, division):
     browser = create_webdriver(False)
     open_url(browser, website, website_title, 'open site')
-    
+    script_execution(browser, seasons[season.lower()].season_link())
+    # open_division(browser, division)
+
