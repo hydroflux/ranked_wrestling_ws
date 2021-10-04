@@ -1,1 +1,1 @@
-# ranked_wrestling_ws
+# Ranked Wrestling
