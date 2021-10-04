@@ -4,6 +4,7 @@ from settings.driver import create_webdriver
 
 from variables.variables import website, website_title
 
-def execute(headless):
+def execute(headless, season):
     browser = create_webdriver(False)
     open_url(browser, website, website_title, 'open site')
+    
