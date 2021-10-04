@@ -13,4 +13,4 @@ class Division:
         Division.number_of_divisions += 1
 
     def __str__(self):
-        return f'{self.state} {self.type} - {self.name} ({self.abbreviation})'
+        return f'{self.state} {self.type} - {self.name} ({self.division_abbreviation})'

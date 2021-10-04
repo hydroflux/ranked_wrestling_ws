@@ -9,9 +9,9 @@ from variables.seasons import seasons
 
 headless = False
 
-def execute(headless, season, division):
+def execute(headless, season, state):
     browser = create_webdriver(headless)
     open_url(browser, website, website_title, 'open site')
     script_execution(browser, seasons[season.lower()].season_link())
-    open_division(browser, division)
+    division = open_division(browser, state)
 
