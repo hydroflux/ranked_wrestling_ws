@@ -10,9 +10,10 @@
 ###############
 logs/
 venv/
+variables
 
 # Specific files #
 ##################
 .vscode
 __pycache__
-settings/settings
+settings/settings.py
