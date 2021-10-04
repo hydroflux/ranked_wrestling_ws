@@ -1,0 +1,17 @@
+# File types #
+##############
+*.pyc
+*.swo
+*.swp
+*.swn
+*.DS_Store
+
+# Directories #
+###############
+logs/
+venv/
+
+# Specific files #
+##################
+.vscode
+__pycache__
