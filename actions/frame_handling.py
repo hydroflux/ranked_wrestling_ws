@@ -22,4 +22,4 @@ def switch_to_search_frame(browser):
 
 
 def switch_to_header_frame(browser):
-    switch_to_frame(browser, search_frame_id, "header frame")
+    switch_to_frame(browser, header_frame_id, "header frame")
