@@ -1,4 +1,4 @@
-from actions import open_division
+from actions.divisions import open_division
 from selenium_utilities.open import open_url
 
 from settings.driver import create_webdriver
