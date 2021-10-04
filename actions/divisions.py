@@ -1,4 +1,5 @@
 from selenium.webdriver.support.ui import Select
+from selenium_utilities.open import assert_window_title
 from settings.general_functions import script_execution
 
 from variables.general import division_menu_id
@@ -11,8 +12,9 @@ def select_division(browser, division):
     selector.select_by_value(division.value)
 
 
-def open_division(browser, state):
+def open_division(browser, season, state):
     division = divisions[state]
     select_division(browser, division)
     script_execution(browser, division_script)
+    assert_window_title(browser, season.title)
     return division
