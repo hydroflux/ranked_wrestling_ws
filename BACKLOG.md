@@ -12,3 +12,9 @@
 ## Interface
 
 - [ ] Create a way to prompt the user for 'season', 'headless', and 'state', etc.
+
+## Selenium Utilities
+
+### Locators
+
+- [ ] Implement a 'quick' option to skip the WebDriverWait to locator functions

@@ -1,14 +1,18 @@
-from actions.cities import record_cities
+from objects.invalid_search import record_invalid_league
+
 from objects.stats import stats
 
-from selenium_utilities.locators import (locate_elements_by_class_name,
+from selenium_utilities.locators import (locate_element_by_class_name,
+                                         locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
 
 from settings.general_functions import get_direct_link, script_execution
 
-from variables.general import league_link_tag_name, league_row_class_name
+from variables.general import (league_link_tag_name, league_row_class_name,
+                               no_records_class)
 from variables.scripts import next_page_script
 
+from actions.cities import record_cities
 from actions.pages import get_page_data, get_page_handler
 
 
@@ -72,10 +76,18 @@ def report_leagues(season, division):
           f'{division.name} {season.title} season.\n')
 
 
+def check_for_league_results(browser):
+    page_data = get_page_data(browser)
+    if not locate_element_by_class_name(page_data, no_records_class, "no records"): return True
+
+
 def search_league(browser, season, division, league, stats):
     print(f'Searching "{league["name"]}" by city...')
     browser.get(league["link"])
-    record_cities(browser, season, division, league, stats)
+    if check_for_league_results(browser):
+        record_cities(browser, season, division, league, stats)
+    else:
+        record_invalid_league(browser, division, league, stats)
 
 
 def record_leagues(browser, season, division, league_list):
