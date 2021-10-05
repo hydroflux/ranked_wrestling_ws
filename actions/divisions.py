@@ -37,9 +37,7 @@ def open_division(browser, season, division, alt=False):
 
 def validate_league_divisions(browser):
     page_data = get_page_data(browser)
-    divisions = locate_elements_by_class_name(page_data, main_table_divisions_class_name, "league divisions")
-    
-    
+    divisions = locate_elements_by_class_name(page_data, main_table_divisions_class_name, "league divisions")    
 
 
 def open_division_leagues(browser, season, division):
