@@ -32,7 +32,7 @@ def get_league_links(page_data):
     league_rows = locate_elements_by_class_name(page_data, league_row_class_name, 'league rows')
     for row in league_rows:
         link_element = locate_elements_by_tag_name(row, league_link_tag_name, "league link", True)[1]
-        league_links.append((link_element.text, get_direct_link(link_element)))
+        league_links.append({"name": link_element.text, "link": get_direct_link(link_element)})
     return league_links
 
 
