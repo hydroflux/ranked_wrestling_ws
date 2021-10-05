@@ -32,20 +32,34 @@ def get_league_links(page_data):
     return league_links
 
 
-def add_leagues(browser, league_list):
+def add_page_leagues(browser, league_list):
     page_data = get_page_data(browser)
     league_links = get_league_links(page_data)
     league_list.extend(league_links)
     print(f'Added {str(len(league_links))} leagues to league links list.')
 
 
-def create_league_list(browser, division):
+def add_leagues(browser, division, league_list):
     league_list = []
-    add_leagues(browser, league_list)
+    add_page_leagues(browser, league_list)
     while len(league_list) < division.number_leagues: 
         script_execution(browser, next_page_script)
-        add_leagues(browser, league_list)
+        add_page_leagues(browser, league_list)
     return league_list
+    
+
+def validate_league_list(browser, division, league_list):
+    while division.number_leagues != len(league_list):
+        print(f'Leagues list calculated incorrectly, located '
+              f'{len(league_list)} leagues out of '
+              f'{division.number_leagues} found in initial count, trying again.')
+        league_list = add_leagues(browser, division)
+    return league_list
+
+
+def create_league_list(browser, division):
+    league_list = add_leagues(browser, division)
+    return validate_league_list(browser, division, league_list)
 
 
 def record_division_leagues(browser, season, division):
