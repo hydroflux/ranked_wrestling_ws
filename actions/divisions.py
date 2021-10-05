@@ -32,14 +32,13 @@ def open_division(browser, season, division, alt=False):
     select_division(browser, division, alt)
     execute_division_option(browser, alt)
     assert_window_title(browser, season.title)
-    return division
 
 
 def check_league_divisions(browser):
     page_data = get_page_data(browser)
     division_elements = locate_elements_by_class_name(page_data, main_table_divisions_class_name, "league divisions")
-    divisions = get_list_element_text(division_elements)
-    all_equal(divisions)
+    division_results = get_list_element_text(division_elements)
+    all_equal(division_results)
 
 
 def validate_league_divisions(browser):

@@ -1,5 +1,7 @@
-from settings.general_functions import script_execution
+from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
+from settings.general_functions import get_direct_link, script_execution
 
+from variables.general import league_row_class_name, league_link_tag_name
 from variables.scripts import next_page_script
 
 from actions.pages import get_page_data, get_page_handler
@@ -22,7 +24,12 @@ def count_leagues(browser, division):
 
 
 def get_league_links(page_data):
-    pass
+    league_links = []
+    league_rows = locate_elements_by_class_name(page_data, league_row_class_name, 'league rows')
+    for row in league_rows:
+        link_element = locate_elements_by_tag_name(row, league_link_tag_name, "league link", True)[1]
+        league_links.append(get_direct_link(link_element))
+    return league_links
 
 
 def add_leagues(browser, league_list):
@@ -32,12 +39,15 @@ def add_leagues(browser, league_list):
     print(f'Added {str(len(league_links))} leagues to league links list.')
 
 
-def validate_number_leagues(browser, division):
+def create_league_list(browser, division):
     league_list = []
     add_leagues(browser, league_list)
+    while len(league_list) < division.number_leagues: 
+        script_execution(browser, next_page_script)
+        add_leagues(browser, league_list)
     return league_list
 
 
-def create_league_list(browser, season, division):
+def record_division_leagues(browser, season, division):
     count_leagues(browser, division)
-    validate_number_leagues(browser, division)
+    league_list = create_league_list(browser, division)

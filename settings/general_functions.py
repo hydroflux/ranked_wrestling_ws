@@ -15,3 +15,7 @@ def get_list_element_text(list):
 def all_equal(iterable):
     group = groupby(iterable)
     return next(group, True) and not next(group, False)
+
+
+def get_direct_link(link_element):
+    return link_element.get_attribute("href")
