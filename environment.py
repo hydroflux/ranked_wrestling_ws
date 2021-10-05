@@ -1,4 +1,5 @@
 from actions.divisions import open_division, open_division_leagues
+from actions.main_menu import select_menu_option
 from selenium_utilities.open import open_url
 
 from settings.driver import create_webdriver
@@ -12,9 +13,10 @@ from variables.divisions import divisions
 
 def execute(headless, season, state):
     browser = create_webdriver(headless)
-    open_url(browser, website, website_title, 'open site')
-    script_execution(browser, seasons[season.lower()].season_link())
     division = divisions[state.upper()]
+    season = seasons[season.lower()]
+    open_url(browser, website, website_title, 'open site')
+    script_execution(browser, season.season_link())
     open_division(browser, season, division)
     open_division_leagues(browser, season, division)
     return browser  # used during testing to continue working after executing function
