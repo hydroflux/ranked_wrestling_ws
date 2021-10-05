@@ -1,4 +1,4 @@
-from actions.divisions import open_division
+from actions.divisions import open_division, open_division_leagues
 from selenium_utilities.open import open_url
 
 from settings.driver import create_webdriver
@@ -15,5 +15,5 @@ def execute(headless, season, state):
     open_url(browser, website, website_title, 'open site')
     script_execution(browser, seasons[season.lower()].season_link())
     division = divisions[state]
-    division = open_division(browser, season, division)
-
+    open_division(browser, season, division)
+    open_division_leagues(browser, season, division)

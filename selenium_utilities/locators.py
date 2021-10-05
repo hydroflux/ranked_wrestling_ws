@@ -3,8 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from selenium_utilities.locators import locate_elements_by_tag_name
-
 from settings.timers import timeout
 
 
