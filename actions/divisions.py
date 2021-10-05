@@ -1,13 +1,16 @@
 from selenium.webdriver.support.ui import Select
-from actions.frame_handling import switch_to_page_frame
-from actions.main_menu import select_menu_option
 from selenium_utilities.inputs import click_button
 from selenium_utilities.locators import locate_element_by_id
 from selenium_utilities.open import assert_window_title
 from settings.general_functions import script_execution
+from variables.general import (alt_division_menu_id, division_menu_id,
+                               main_table_divisions_class_name,
+                               search_button_id)
+from variables.scripts import alt_division_script, division_script
 
-from variables.general import division_menu_id, alt_division_menu_id, search_button_id
-from variables.scripts import division_script, alt_division_script
+from actions.frame_handling import switch_to_page_frame
+from actions.main_menu import select_menu_option
+from actions.pages import get_page_data
 
 
 def select_division(browser, division, alt):
@@ -26,6 +29,11 @@ def open_division(browser, season, division, alt=False):
     execute_division_option(browser, alt)
     assert_window_title(browser, season.title)
     return division
+
+
+def validate_league_divisions(browser):
+    page_data = get_page_data(browser)
+    pass
 
 
 def open_division_leagues(browser, season, division):
