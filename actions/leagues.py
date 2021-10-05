@@ -67,7 +67,16 @@ def report_leagues(season, division):
           f'{division.name} {season.title} season.\n')
 
 
+def search_league(browser, league):
+    pass
+
+
+def record_leagues(browser, league_list):
+    [search_league(browser, league) for league in league_list]
+
+
 def record_division_leagues(browser, season, division):
     count_leagues(browser, division)
     league_list = create_league_list(browser, division)
     report_leagues(season, division)
+    record_leagues(browser, league_list)
