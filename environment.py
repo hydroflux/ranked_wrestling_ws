@@ -1,4 +1,5 @@
 from actions.divisions import open_division, open_division_leagues
+from actions.leagues import create_league_list
 from actions.main_menu import select_menu_option
 from selenium_utilities.open import open_url
 
@@ -19,4 +20,5 @@ def execute(headless, season, state):
     script_execution(browser, season.season_link())
     open_division(browser, season, division)
     open_division_leagues(browser, season, division)
+    create_league_list(browser, season, division)
     return browser  # used during testing to continue working after executing function
