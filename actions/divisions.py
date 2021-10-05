@@ -35,11 +35,17 @@ def open_division(browser, season, division, alt=False):
     return division
 
 
-def validate_league_divisions(browser):
+def check_league_divisions(browser):
     page_data = get_page_data(browser)
     division_elements = locate_elements_by_class_name(page_data, main_table_divisions_class_name, "league divisions")
     divisions = get_list_element_text(division_elements)
     all_equal(divisions)
+
+
+def validate_league_divisions(browser):
+    while not check_league_divisions(browser):
+        print('Page not loaded correctly, checking again.')
+        check_league_divisions(browser)
 
 
 def open_division_leagues(browser, season, division):
