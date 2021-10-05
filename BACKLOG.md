@@ -8,3 +8,7 @@
 ## Classes & Objects
 
 - [ ] Do a gap analysis of the "Stats" class vs. the 'stats' object to determine the best way to proceed
+
+## Interface
+
+- [ ] Create a way to prompt the user for 'season', 'headless', and 'state', etc.

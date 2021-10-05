@@ -3,13 +3,12 @@ from selenium_utilities.open import open_url
 
 from settings.driver import create_webdriver
 from settings.general_functions import script_execution
+from settings.settings import headless, season, state
 
 from variables.general import website, website_title
 from variables.seasons import seasons
 from variables.divisions import divisions
 
-# Temporary bandaid while in development
-headless = False
 
 def execute(headless, season, state):
     browser = create_webdriver(headless)
