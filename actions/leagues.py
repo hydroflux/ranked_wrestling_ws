@@ -14,7 +14,7 @@ def get_number_leagues(page_handler):
 
 def report_number_leagues(division):
     print(f'Total Leagues for the {division.name} Division:\n'
-          f'{division.number_leagues}')
+          f'{str(division.number_leagues)}')
 
 
 def count_leagues(browser, division):
@@ -51,8 +51,8 @@ def add_leagues(browser, division, league_list):
 def validate_league_list(browser, division, league_list):
     while division.number_leagues != len(league_list):
         print(f'Leagues list calculated incorrectly, located '
-              f'{len(league_list)} leagues out of '
-              f'{division.number_leagues} found in initial count, trying again.')
+              f'{str(len(league_list))} leagues out of '
+              f'{str(division.number_leagues)} found in initial count, trying again.')
         league_list = add_leagues(browser, division)
     return league_list
 
@@ -62,6 +62,12 @@ def create_league_list(browser, division):
     return validate_league_list(browser, division, league_list)
 
 
+def report_leagues(season, division):
+    print(f'{str(division.number_leagues)} leagues found for the '
+          f'{division.name} {season.title} season.\n')
+
+
 def record_division_leagues(browser, season, division):
     count_leagues(browser, division)
     league_list = create_league_list(browser, division)
+    report_leagues(season, division)
