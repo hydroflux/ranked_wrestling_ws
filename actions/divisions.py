@@ -22,9 +22,8 @@ def execute_division_option(browser, alt):
 
 
 def open_division(browser, season, division, alt=False):
-    print(alt)
     select_division(browser, division, alt)
-    open_division(browser, alt)
+    execute_division_option(browser, alt)
     assert_window_title(browser, season.title)
     return division
 
