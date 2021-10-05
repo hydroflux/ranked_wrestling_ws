@@ -1,8 +1,12 @@
 from selenium.webdriver.support.ui import Select
+
 from selenium_utilities.inputs import click_button
-from selenium_utilities.locators import locate_element_by_id
+from selenium_utilities.locators import (locate_element_by_id,
+                                         locate_elements_by_class_name)
 from selenium_utilities.open import assert_window_title
+
 from settings.general_functions import script_execution
+
 from variables.general import (alt_division_menu_id, division_menu_id,
                                main_table_divisions_class_name,
                                search_button_id)
@@ -33,7 +37,9 @@ def open_division(browser, season, division, alt=False):
 
 def validate_league_divisions(browser):
     page_data = get_page_data(browser)
-    pass
+    divisions = locate_elements_by_class_name(page_data, main_table_divisions_class_name, "league divisions")
+    
+    
 
 
 def open_division_leagues(browser, season, division):
