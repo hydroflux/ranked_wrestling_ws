@@ -18,3 +18,4 @@ def execute(headless, season, state):
     division = divisions[state.upper()]
     open_division(browser, season, division)
     open_division_leagues(browser, season, division)
+    return browser  # used during testing to continue working after executing function

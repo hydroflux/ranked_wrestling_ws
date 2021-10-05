@@ -16,7 +16,7 @@ def select_division(browser, division, alt):
     selector.select_by_value(division.value)
 
 
-def open_division(browser, alt):
+def execute_division_option(browser, alt):
     script = alt_division_script if alt else division_script
     script_execution(browser, script)
 
