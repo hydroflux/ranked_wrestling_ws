@@ -2,14 +2,12 @@
 
 ## General To Do
 
-- [ ] Split 'actions' script into smaller scripts as needed
-- [ ] Remove the 'headless' floating variable in the environment file after finishing initial development
+- [ ] Add timers
 
 ## Classes & Objects
 
 - [ ] Do a gap analysis of the "Stats" class vs. the 'stats' object to determine the best way to proceed
-- [ ] Benefits of using "Stats" class:
-- [ ] Hold ids, class_names, and tag_names in the class instance
+- [ ] Benefits of using "Stats" class: Hold ids, class_names, and tag_names in the class instance
 
 ## Interface
 

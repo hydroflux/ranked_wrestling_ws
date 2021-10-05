@@ -19,5 +19,7 @@ def execute(headless, season, state):
     script_execution(browser, season.season_link())
     open_division(browser, season, division)
     open_division_leagues(browser, season, division)
-    record_division_leagues(browser, season, division)
+    stats = record_division_leagues(browser, season, division)
+    print(stats)
+    # export stats
     return browser  # used during testing to continue working after executing function

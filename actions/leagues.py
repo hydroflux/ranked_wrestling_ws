@@ -1,7 +1,11 @@
-from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
+from objects.stats import stats
+
+from selenium_utilities.locators import (locate_elements_by_class_name,
+                                         locate_elements_by_tag_name)
+
 from settings.general_functions import get_direct_link, script_execution
 
-from variables.general import league_row_class_name, league_link_tag_name
+from variables.general import league_link_tag_name, league_row_class_name
 from variables.scripts import next_page_script
 
 from actions.pages import get_page_data, get_page_handler
@@ -67,16 +71,16 @@ def report_leagues(season, division):
           f'{division.name} {season.title} season.\n')
 
 
-def search_league(browser, league):
+def search_league(browser, league, stats):
     pass
 
 
 def record_leagues(browser, league_list):
-    [search_league(browser, league) for league in league_list]
+    return [search_league(browser, league, stats) for league in league_list]
 
 
 def record_division_leagues(browser, season, division):
     count_leagues(browser, division)
     league_list = create_league_list(browser, division)
     report_leagues(season, division)
-    record_leagues(browser, league_list)
+    return record_leagues(browser, league_list)
