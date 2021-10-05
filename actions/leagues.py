@@ -1,3 +1,4 @@
+from actions.cities import record_cities
 from objects.stats import stats
 
 from selenium_utilities.locators import (locate_elements_by_class_name,
@@ -71,16 +72,18 @@ def report_leagues(season, division):
           f'{division.name} {season.title} season.\n')
 
 
-def search_league(browser, league, stats):
-    pass
+def search_league(browser, season, division, league, stats):
+    print(f'Searching "{league["name"]}" by city...')
+    browser.get(league["link"])
+    record_cities(browser, season, division, league, stats)
 
 
-def record_leagues(browser, league_list):
-    return [search_league(browser, league, stats) for league in league_list]
+def record_leagues(browser, season, division, league_list):
+    return [search_league(browser, season, division, league, stats) for league in league_list]
 
 
 def record_division_leagues(browser, season, division):
     count_leagues(browser, division)
     league_list = create_league_list(browser, division)
     report_leagues(season, division)
-    return record_leagues(browser, league_list)
+    return record_leagues(browser, season, division, league_list)
