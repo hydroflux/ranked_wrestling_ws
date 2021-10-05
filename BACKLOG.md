@@ -3,6 +3,7 @@
 ## General To Do
 
 - [ ] Split 'actions' script into smaller scripts as needed
+- [ ] Remove the 'headless' floating variable in the environment file after finishing initial development
 
 ## Classes & Objects
 

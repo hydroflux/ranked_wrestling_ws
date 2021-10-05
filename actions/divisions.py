@@ -11,7 +11,7 @@ from variables.scripts import division_script, alt_division_script
 
 
 def select_division(browser, division, alt):
-    menu_id = division_menu_id if alt else alt_division_menu_id
+    menu_id = alt_division_menu_id if alt else division_menu_id
     selector = Select(browser.find_element_by_id(menu_id))
     selector.select_by_value(division.value)
 
@@ -22,6 +22,7 @@ def open_division(browser, alt):
 
 
 def open_division(browser, season, division, alt=False):
+    print(alt)
     select_division(browser, division, alt)
     open_division(browser, alt)
     assert_window_title(browser, season.title)
