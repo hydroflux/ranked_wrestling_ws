@@ -1,5 +1,8 @@
-from actions.frame_handling import switch_to_page_frame
-from actions.pages import get_page_handler
+from settings.general_functions import script_execution
+
+from variables.scripts import next_page_script
+
+from actions.pages import get_page_data, get_page_handler
 
 
 def get_number_leagues(page_handler):
@@ -18,5 +21,23 @@ def count_leagues(browser, division):
     report_number_leagues(division)
 
 
+def get_league_links(page_data):
+    pass
+
+
+def add_leagues(browser, league_list):
+    page_data = get_page_data(browser)
+    league_links = get_league_links(page_data)
+    league_list.extend(league_links)
+    print(f'Added {str(len(league_links))} leagues to league links list.')
+
+
+def validate_number_leagues(browser, division):
+    league_list = []
+    add_leagues(browser, league_list)
+    return league_list
+
+
 def create_league_list(browser, season, division):
     count_leagues(browser, division)
+    validate_number_leagues(browser, division)
