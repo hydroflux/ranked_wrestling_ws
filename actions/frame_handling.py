@@ -1,6 +1,6 @@
 from selenium_utilities.locators import locate_element_by_id
-from variables.iframes import (header_frame_id, page_frame_id,
-                               page_grid_frame_id, search_frame_id)
+
+from variables.iframes import header_frame_id, page_frame_id, search_frame_id
 
 
 def switch_to_frame(browser, id, type):
