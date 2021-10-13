@@ -1,6 +1,6 @@
 class Division:
 
-    number_of_divisions = 0
+    total_divisions = 0
 
     def __init__(self, value, type, state, state_abbreviation, name, division_abbreviation,
                  number_leagues=0, leagues=None
@@ -14,7 +14,7 @@ class Division:
         self.number_leagues = number_leagues
         self.leagues = leagues
 
-        Division.number_of_divisions += 1
+        Division.total_divisions += 1
 
     def __str__(self):
         return f'{self.state} {self.type} - {self.name} ({self.division_abbreviation})'
