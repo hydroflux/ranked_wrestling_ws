@@ -77,7 +77,7 @@ def report_leagues(season, division):
 
 
 def check_for_league_results(browser):
-    page_data = get_page_data(browser)
+    page_data = get_page_data(browser, False)
     if not locate_element_by_class_name(page_data, no_records_class, "no records"): return True
 
 

@@ -5,8 +5,8 @@ from selenium_utilities.locators import locate_element_by_id
 from variables.general import main_table_id, page_handler_id
 
 
-def get_page_data(browser):
-    switch_to_page_frame(browser)
+def get_page_data(browser, frame=True):
+    if frame: switch_to_page_frame(browser)
     return locate_element_by_id(browser, main_table_id, "main page table")
 
 
