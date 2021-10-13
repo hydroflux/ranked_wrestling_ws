@@ -18,13 +18,14 @@ from actions.teams import record_teams
 from actions.pages import get_page_data, get_page_handler
 
 
+# get_number_leagues & get_number_teams is the EXACT same function
 def get_number_leagues(page_handler):
     handler_text = page_handler.text
     return int(handler_text[handler_text.rfind(' ') + 1:])
 
 
 def report_number_leagues(division):
-    print(f'Total Leagues for the {division.name} Division:\n'
+    print(f'Total Leagues for the "{division.name}" Division:\n'
           f'{str(division.number_leagues)}')
 
 
