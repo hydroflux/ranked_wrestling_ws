@@ -86,12 +86,12 @@ def check_for_team_results():
     pass
 
 
-def search_team():
+def search_team(browser, season, division, league, team, stats):
     pass
 
 
-def record_teams():
-    pass
+def record_teams(browser, season, division, league, stats):
+    return [search_team(browser, season, division, league, team, stats) for team in league.teams]
 
 
 def record_league_teams(browser, season, division, league, stats):
@@ -99,4 +99,4 @@ def record_league_teams(browser, season, division, league, stats):
     team_list = create_team_list(browser, league)
     update_league_teams(league, team_list)
     report_teams(division, league)
-    # return record_teams()
+    return record_teams(browser, season, division, league, stats)
