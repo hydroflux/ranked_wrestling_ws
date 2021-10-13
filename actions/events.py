@@ -77,6 +77,14 @@ def report_events(league, team):
           f'{team.name} {league.name} league.\n')
 
 
+def search_event(browser, season, division, league, team, event, stats):
+    pass
+
+
+def record_events(browser, season, division, league, team, stats):
+    return [search_event(browser, season, division, league, team, event, stats) for event in team.events]
+
+
 def record_team_events(browser, season, division, league, team, stats):
     # count_events(browser, team)
     event_list = create_event_list(browser, team)
