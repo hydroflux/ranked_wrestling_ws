@@ -25,8 +25,8 @@ def get_number_leagues(page_handler):
 
 
 def report_number_leagues(division):
-    print(f'Total Leagues for the "{division.name}" Division:\n'
-          f'{str(division.number_leagues)}')
+    print(f'{str(division.number_leagues)} total leagues located for the '
+          f'"{division.name}" Division.')
 
 
 def count_leagues(browser, division):

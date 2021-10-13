@@ -15,8 +15,8 @@ def get_number_teams(page_handler):
 
 # very similar to report_number_leagues
 def report_number_teams(league):
-    print(f'Total Teams for the "{league.name}" League:\n'
-          f'{str(league.number_teams)}')
+    print(f'{str(league.number_teams)} total teams located for the '
+          f'"{league.name}" League.')
 
 
 # very similar to count_leagues
@@ -60,10 +60,10 @@ def add_teams(browser, league, team_list):
 def validate_team_list(browser, league, team_list):
     while league.number_teams != len(team_list):
         print(f'Teams list calculated incorrectly, located '
-              f'{str(len(league_list))} teams out of '
+              f'{str(len(team_list))} teams out of '
               f'{str(league.number_teams)} found in initial count, trying again.')
-        league_list = add_teams(browser, league, team_list)
-    return league_list
+        team_list = add_teams(browser, league, team_list)
+    return team_list
 
 
 def create_team_list(browser, league):

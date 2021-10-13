@@ -1,5 +1,6 @@
 from actions.divisions import open_division, open_division_leagues
 from actions.leagues import record_division_leagues
+
 from selenium_utilities.open import open_url
 
 from settings.driver import create_webdriver
