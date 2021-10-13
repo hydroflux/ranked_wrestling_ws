@@ -49,7 +49,6 @@ def add_page_leagues(browser, league_list):
 
 
 def add_leagues(browser, division, league_list):
-    league_list = []
     add_page_leagues(browser, league_list)
     while len(league_list) < division.number_leagues: 
         script_execution(browser, next_page_script)
@@ -62,12 +61,13 @@ def validate_league_list(browser, division, league_list):
         print(f'Leagues list calculated incorrectly, located '
               f'{str(len(league_list))} leagues out of '
               f'{str(division.number_leagues)} found in initial count, trying again.')
-        league_list = add_leagues(browser, division)
+        league_list = add_leagues(browser, division, league_list)
     return league_list
 
 
 def create_league_list(browser, division):
-    league_list = add_leagues(browser, division)
+    league_list = []
+    league_list = add_leagues(browser, division, league_list)
     return validate_league_list(browser, division, league_list)
 
 
