@@ -1,8 +1,9 @@
 from actions.pages import get_page_data, get_page_handler
 from classes.Event import Event
+from objects.invalid_search import check_for_results, record_invalid_event
 from selenium_utilities.locators import locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
 
-from settings.general_functions import get_direct_link
+from settings.general_functions import get_direct_link, script_execution
 from variables.general import row_class_name, link_tag_name, row_data_tag
 
 # def get_number_events(page_handler):
@@ -78,7 +79,16 @@ def report_events(league, team):
 
 
 def search_event(browser, season, division, league, team, event, stats):
-    pass
+    print(f'Searching "{event.name}" for matches...')
+    script_execution(browser, event.link)
+    # switch into window
+    if check_for_results(browser):
+        record_event_matches(browser, season, division, league, team, event, stats)
+    else:
+        record_invalid_event(browser, division, league, team, event, stats)
+    # close window
+
+    
 
 
 def record_events(browser, season, division, league, team, stats):

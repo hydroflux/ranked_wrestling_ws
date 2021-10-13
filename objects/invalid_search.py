@@ -14,3 +14,7 @@ def record_invalid_league(browser, division, league, stats):
 
 def record_invalid_team(browser, division, league, team, stats):
     pass
+
+
+def record_invalid_event(browser, division, league, team, event, stats):
+    pass
