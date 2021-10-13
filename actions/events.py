@@ -1,11 +1,17 @@
-from actions.matches import record_event_matches
-from actions.pages import get_page_data, get_page_handler
 from classes.Event import Event
+
 from objects.invalid_search import check_for_results, record_invalid_event
-from selenium_utilities.locators import locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
+
+from selenium_utilities.locators import (locate_element_by_tag_name,
+                                         locate_elements_by_class_name,
+                                         locate_elements_by_tag_name)
 
 from settings.general_functions import get_direct_link, script_execution
-from variables.general import row_class_name, link_tag_name, row_data_tag
+
+from variables.general import link_tag_name, row_class_name, row_data_tag
+
+from actions.matches import record_event_matches
+from actions.pages import get_page_data, get_page_handler
 
 # def get_number_events(page_handler):
 #     handler_text = page_handler.text
