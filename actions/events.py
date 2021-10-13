@@ -1,5 +1,5 @@
 from actions.pages import get_page_data, get_page_handler
-from selenium_utilities.locators import locate_elements_by_class_name
+from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
 
 from variables.general import row_class_name, link_tag_name, row_data_tag
 
@@ -17,9 +17,16 @@ from variables.general import row_class_name, link_tag_name, row_data_tag
 #     page_handler = get_page_handler(browser)
 
 
+def build_event_links(event_links, event_information):
+    pass
+
+
 def get_event_links(page_data):
     event_links = []
     event_rows = locate_elements_by_class_name(page_data, row_class_name, 'event rows')
+    for row in event_rows:
+        event_information = locate_elements_by_tag_name(row, row_data_tag, "event information")
+        build_event_links(event_links, event_information)
 
 
 def add_page_events(browser, team, event_list):
@@ -27,7 +34,6 @@ def add_page_events(browser, team, event_list):
     event_links = get_event_links(page_data)
     event_list.extend(event_links)
     print(f'Added {str(len(event_links))} events to "{team.name}" team list.')
-
 
 
 def add_events(browser, team, event_list):
