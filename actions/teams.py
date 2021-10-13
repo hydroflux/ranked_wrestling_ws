@@ -51,13 +51,19 @@ def add_teams(browser, league, team_list):
     return team_list
 
 
-def validate_team_list():
-    pass
+def validate_team_list(browser, league, team_list):
+    while league.number_teams != len(team_list):
+        print(f'Teams list calculated incorrectly, located '
+              f'{str(len(league_list))} teams out of '
+              f'{str(league.number_teams)} found in initial count, trying again.')
+        league_list = add_teams(browser, league, team_list)
+    return league_list
 
 
 def create_team_list(browser, league):
     team_list = []
     team_list = add_teams(browser, league, team_list)
+    return validate_team_list(browser, league, team_list)
 
 
 def update_league_teams():
