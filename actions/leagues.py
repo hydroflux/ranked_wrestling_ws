@@ -32,6 +32,10 @@ def count_leagues(browser, division):
     report_number_leagues(division)
 
 
+# def build_league_link():
+#     pass
+
+
 def get_league_links(page_data):
     league_links = []
     league_rows = locate_elements_by_class_name(page_data, row_class_name, 'league rows')

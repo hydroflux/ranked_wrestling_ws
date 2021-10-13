@@ -34,6 +34,10 @@ def count_teams(browser, league):
     report_number_teams(league)
 
 
+# def build_team_link():
+#     pass
+
+
 # very similar to 'get_league_links'
 def get_team_links(page_data):
     team_links = []

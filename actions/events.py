@@ -36,6 +36,7 @@ def get_event_links(page_data):
     for row in event_rows:
         event_information = locate_elements_by_tag_name(row, row_data_tag, "event information")
         event_links.append(build_event_link(event_information))
+    return event_links
 
 
 def add_page_events(browser, team, event_list):
@@ -46,7 +47,11 @@ def add_page_events(browser, team, event_list):
 
 
 def add_events(browser, team, event_list):
-    pass
+    add_page_events(browser, team, event_list)
+    while len(event_list) < team.number_events:
+        print('Encountered multiple event pages, please review, update code, & re-start.')
+        input()
+    return event_list
 
 
 def create_event_list(browser, team):
