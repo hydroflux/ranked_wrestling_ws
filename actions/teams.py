@@ -77,8 +77,9 @@ def update_league_teams(league, team_list):
     league.teams = teams
 
 
-def report_teams():
-    pass
+def report_teams(division, league):
+    print(f'{str(league.number_teams)} teams found for the '
+          f'{league.name} {division.name} division.\n')
 
 
 def check_for_team_results():
@@ -96,3 +97,6 @@ def record_teams():
 def record_league_teams(browser, season, division, league, stats):
     count_teams(browser, league)
     team_list = create_team_list(browser, league)
+    update_league_teams(league, team_list)
+    report_teams(division, league)
+    # return record_teams()
