@@ -1,3 +1,5 @@
+from classes.League import League
+
 from objects.invalid_search import record_invalid_league
 
 from objects.stats import stats
@@ -71,6 +73,12 @@ def create_league_list(browser, division):
     return validate_league_list(browser, division, league_list)
 
 
+def update_division_leagues(division, league_list):
+    leagues = [League(league["name"], league["link"]) for league in league_list]
+    division.leagues = leagues
+
+
+
 def report_leagues(season, division):
     print(f'{str(division.number_leagues)} leagues found for the '
           f'{division.name} {season.title} season.\n')
@@ -82,8 +90,8 @@ def check_for_league_results(browser):
 
 
 def search_league(browser, season, division, league, stats):
-    print(f'Searching "{league["name"]}" by team...')
-    browser.get(league["link"])
+    print(f'Searching "{league.name}" for teams...')
+    browser.get(league.link)
     if check_for_league_results(browser):
         record_teams(browser, season, division, league, stats)
     else:
@@ -91,11 +99,12 @@ def search_league(browser, season, division, league, stats):
 
 
 def record_leagues(browser, season, division, league_list):
-    return [search_league(browser, season, division, league, stats) for league in league_list]
+    return [search_league(browser, season, division, league, stats) for league in division.leagues]
 
 
 def record_division_leagues(browser, season, division):
     count_leagues(browser, division)
     league_list = create_league_list(browser, division)
+    update_division_leagues(division, league_list)
     report_leagues(season, division)
     return record_leagues(browser, season, division, league_list)

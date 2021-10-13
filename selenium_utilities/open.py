@@ -1,5 +1,4 @@
 def assert_window_title(browser, page_title):
-    print('page_title', page_title)
     try:
         assert page_title in browser.title.strip()
         return True
