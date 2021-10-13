@@ -4,11 +4,25 @@
 
 - [ ] Add timers
 - [ ] Keep all higher level attributes on the lower level class instances in order to avoid passing as many variables back and forth while recording
+
+## Actions
+
+### Leagues
+
 - [ ] Consider refactoring 'count_leagues' and 'count_teams' into unified 'count' functions--very similar series of functions ('get_number...', 'report...', 'count...')
 - [ ] 'get_league_links' and 'get_team_links' are, as above, almost identical functions
 - [ ] 'add_teams' and 'add_leagues' are identical other than a frame switch
-- [ ] Create 'build_team_link' and 'build_league_link' functions to match the 'build_event_link' function
+- [ ] Create a 'build_league_link' function similar to the 'build_event_link' function in 'events' script
+
+### Teams
+
+- [ ] Create a 'build_team_link' function similar to the 'build_event_link' function in 'events' script
+
+### Events
+
 - [ ] Create a path for multiple pages of events in the 'events' actions script--currently have a print statement with an input to catch the first multi-page event the application comes across
+- [ ] Figure out some way to do a 'total event' count to compare against the event list
+- [ ] Create a 'validate_event_list' function after completing the above
 
 ## Classes & Objects
 
