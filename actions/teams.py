@@ -3,9 +3,9 @@ from actions.frame_handling import switch_to_page_frame
 from classes.Team import Team
 from actions.pages import get_page_data, get_page_handler
 from objects.invalid_search import record_invalid_team
-from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
+from selenium_utilities.locators import locate_element_by_class_name, locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
-from variables.general import row_class_name, row_data_tag, link_tag_name
+from variables.general import row_class_name, row_data_tag, link_tag_name, no_records_class
 from variables.scripts import next_page_script
 
 
@@ -84,8 +84,9 @@ def report_teams(division, league):
           f'{league.name} {division.name} division.\n')
 
 
-def check_for_team_results():
-    pass
+def check_for_team_results(browser,):
+    page_data = get_page_data(browser, False)
+    if not locate_element_by_class_name(page_data, no_records_class, "no records", quick=True): return True
 
 
 def search_team(browser, season, division, league, team, stats):
