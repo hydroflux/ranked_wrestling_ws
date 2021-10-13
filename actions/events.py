@@ -1,4 +1,5 @@
 from actions.pages import get_page_data, get_page_handler
+from classes.Event import Event
 from selenium_utilities.locators import locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
 
 from settings.general_functions import get_direct_link
@@ -54,9 +55,21 @@ def add_events(browser, team, event_list):
     return event_list
 
 
+# validate_event_list
+
+
 def create_event_list(browser, team):
     event_list = []
-    event_list = add_events(browser, team, event_list)
+    return add_events(browser, team, event_list)
+
+
+def update_team_events(team, event_list):
+    events = [Event(event["name"],
+                    event["link"],
+                    event["date"],
+                    event["time"],
+                    event["level"]) for event in event_list]
+    team.events = events
 
 
 def record_team_events(browser, season, division, league, team, stats):
