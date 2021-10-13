@@ -1,21 +1,18 @@
 from classes.League import League
 
 from objects.invalid_search import check_for_results, record_invalid_league
-
 from objects.stats import stats
 
-from selenium_utilities.locators import (locate_element_by_class_name,
-                                         locate_elements_by_class_name,
+from selenium_utilities.locators import (locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
 
 from settings.general_functions import get_direct_link, script_execution
 
-from variables.general import (link_tag_name, row_class_name,
-                               no_records_class)
+from variables.general import link_tag_name, row_class_name
 from variables.scripts import next_page_script
 
-from actions.teams import record_league_teams
 from actions.pages import get_page_data, get_page_handler
+from actions.teams import record_league_teams
 
 
 # get_number_leagues & get_number_teams is the EXACT same function
