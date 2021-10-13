@@ -20,5 +20,45 @@ def count_teams(browser, league):
     report_number_teams(league)
 
 
-def record_teams(browser, season, division, league, stats):
+def get_team_links(page_data):
+    team_links = []
+
+
+def add_page_teams(browser, team_list):
+    pass
+
+
+def add_teams():
+    pass
+
+
+def validate_team_list():
+    pass
+
+
+def create_team_list():
+    pass
+
+
+def update_league_teams():
+    pass
+
+
+def report_teams():
+    pass
+
+
+def check_for_team_results():
+    pass
+
+
+def search_team():
+    pass
+
+
+def record_teams():
+    pass
+
+
+def record_league_teams(browser, season, division, league, stats):
     count_teams(browser, league)
