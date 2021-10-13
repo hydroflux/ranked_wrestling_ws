@@ -13,6 +13,11 @@
 - [ ] Do a gap analysis of the "Stats" class vs. the 'stats' object to determine the best way to proceed
 - [ ] Benefits of using "Stats" class: Hold ids, class_names, and tag_names in the class instance
 
+## Invalid Searches
+
+- [ ] Update the 'record_invalid_league' function
+- [ ] Update the 'record_invalid_team' function
+
 ## Interface
 
 - [ ] Create a way to prompt the user for 'season', 'headless', and 'state', etc.

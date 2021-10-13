@@ -1,6 +1,8 @@
+from actions.events import record_team_events
 from actions.frame_handling import switch_to_page_frame
 from classes.Team import Team
 from actions.pages import get_page_data, get_page_handler
+from objects.invalid_search import record_invalid_team
 from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
 from variables.general import row_class_name, row_data_tag, link_tag_name
@@ -87,7 +89,12 @@ def check_for_team_results():
 
 
 def search_team(browser, season, division, league, team, stats):
-    pass
+    print(f'Searching "{team.name}" for events...')
+    browser.get(team.link)
+    if check_for_team_results(browser):
+        record_team_events(browser, season, division, league, team, stats)
+    else:
+        record_invalid_team(browser, division, league, team, stats)
 
 
 def record_teams(browser, season, division, league, stats):
