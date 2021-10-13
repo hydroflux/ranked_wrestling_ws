@@ -12,7 +12,7 @@ from variables.general import (league_link_tag_name, league_row_class_name,
                                no_records_class)
 from variables.scripts import next_page_script
 
-from actions.cities import record_cities
+from actions.teams import record_teams
 from actions.pages import get_page_data, get_page_handler
 
 
@@ -82,10 +82,10 @@ def check_for_league_results(browser):
 
 
 def search_league(browser, season, division, league, stats):
-    print(f'Searching "{league["name"]}" by city...')
+    print(f'Searching "{league["name"]}" by team...')
     browser.get(league["link"])
     if check_for_league_results(browser):
-        record_cities(browser, season, division, league, stats)
+        record_teams(browser, season, division, league, stats)
     else:
         record_invalid_league(browser, division, league, stats)
 
