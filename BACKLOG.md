@@ -20,9 +20,17 @@
 
 ### Events
 
+- [ ] Need to add functions to check columns & column headers before deciding on where attribute data comes from
+- [ ] Add window handling for opening & closing events
+- [ ] Update 'Event' class after looking through additional event attributes
 - [ ] Create a path for multiple pages of events in the 'events' actions script--currently have a print statement with an input to catch the first multi-page event the application comes across
 - [ ] Figure out some way to do a 'total event' count to compare against the event list
 - [ ] Create a 'validate_event_list' function after completing the above
+
+### Matches
+
+- [ ] Create a "Matches" class
+
 
 ## Classes & Objects
 
