@@ -1,3 +1,4 @@
+from actions.matches import record_event_matches
 from actions.pages import get_page_data, get_page_handler
 from classes.Event import Event
 from objects.invalid_search import check_for_results, record_invalid_event
