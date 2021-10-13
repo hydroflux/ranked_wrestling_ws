@@ -10,7 +10,7 @@ from selenium_utilities.locators import (locate_element_by_class_name,
 
 from settings.general_functions import get_direct_link, script_execution
 
-from variables.general import (league_link_tag_name, league_row_class_name,
+from variables.general import (league_link_tag_name, row_class_name,
                                no_records_class)
 from variables.scripts import next_page_script
 
@@ -37,7 +37,7 @@ def count_leagues(browser, division):
 
 def get_league_links(page_data):
     league_links = []
-    league_rows = locate_elements_by_class_name(page_data, league_row_class_name, 'league rows')
+    league_rows = locate_elements_by_class_name(page_data, row_class_name, 'league rows')
     for row in league_rows:
         link_element = locate_elements_by_tag_name(row, league_link_tag_name, "league link", True)[1]
         league_links.append({"name": link_element.text, "link": get_direct_link(link_element)})
@@ -48,7 +48,7 @@ def add_page_leagues(browser, division, league_list):
     page_data = get_page_data(browser)
     league_links = get_league_links(page_data)
     league_list.extend(league_links)
-    print(f'Added {str(len(league_links))} leagues to {division.name} leagues list.')
+    print(f'Added {str(len(league_links))} leagues to "{division.name}" leagues list.')
 
 
 def add_leagues(browser, division, league_list):
