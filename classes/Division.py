@@ -3,7 +3,7 @@ class Division:
     number_of_divisions = 0
 
     def __init__(self, value, type, state, state_abbreviation, name, division_abbreviation,
-                 number_leagues=0
+                 number_leagues=0, leagues=None
     ):
         self.value = value
         self.type = type
@@ -12,6 +12,7 @@ class Division:
         self.name = name
         self.division_abbreviation = division_abbreviation
         self.number_leagues = number_leagues
+        self.leagues = leagues
 
         Division.number_of_divisions += 1
 
