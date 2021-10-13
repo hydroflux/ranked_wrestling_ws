@@ -30,6 +30,7 @@ def get_team_links(page_data):
     for row in team_rows:
         link_element = locate_elements_by_tag_name(row, link_tag_name, "team link", True)[1]
         team_links.append({"name": link_element.text, "link": get_direct_link(link_element)})
+    return team_links
 
 
 def add_page_teams(browser, league, team_list):
