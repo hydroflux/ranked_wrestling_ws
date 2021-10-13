@@ -1,7 +1,9 @@
+from actions.frame_handling import switch_to_page_frame
 from actions.pages import get_page_data, get_page_handler
 from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
-from settings.general_functions import get_direct_link
+from settings.general_functions import get_direct_link, script_execution
 from variables.general import row_class_name, link_tag_name
+from variables.scripts import next_page_script
 
 
 # get_number_leagues & get_number_teams is the EXACT same function
@@ -42,6 +44,11 @@ def add_page_teams(browser, league, team_list):
 
 def add_teams(browser, league, team_list):
     add_page_teams(browser, league, team_list)
+    while len(team_list) < league.number_teams:
+        switch_to_page_frame(browser)
+        script_execution(browser, next_page_script)
+        add_page_teams(browser, league, team_list)
+    return team_list
 
 
 def validate_team_list():
