@@ -10,7 +10,7 @@ from selenium_utilities.locators import (locate_element_by_class_name,
 
 from settings.general_functions import get_direct_link, script_execution
 
-from variables.general import (league_link_tag_name, row_class_name,
+from variables.general import (link_tag_name, row_class_name,
                                no_records_class)
 from variables.scripts import next_page_script
 
@@ -39,7 +39,7 @@ def get_league_links(page_data):
     league_links = []
     league_rows = locate_elements_by_class_name(page_data, row_class_name, 'league rows')
     for row in league_rows:
-        link_element = locate_elements_by_tag_name(row, league_link_tag_name, "league link", True)[1]
+        link_element = locate_elements_by_tag_name(row, link_tag_name, "league link", True)[1]
         league_links.append({"name": link_element.text, "link": get_direct_link(link_element)})
     return league_links
 

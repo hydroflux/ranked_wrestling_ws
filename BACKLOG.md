@@ -4,6 +4,7 @@
 
 - [ ] Add timers
 - [ ] Consider refactoring 'count_leagues' and 'count_teams' into unified 'count' functions--very similar series of functions ('get_number...', 'report...', 'count...')
+- [ ] 'get_league_links' and 'get_team_links' are, as above, almost identical functions
 
 ## Classes & Objects
 

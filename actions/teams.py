@@ -1,4 +1,7 @@
 from actions.pages import get_page_data, get_page_handler
+from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
+from settings.general_functions import get_direct_link
+from variables.general import row_class_name, link_tag_name
 
 
 # get_number_leagues & get_number_teams is the EXACT same function
@@ -20,8 +23,13 @@ def count_teams(browser, league):
     report_number_teams(league)
 
 
+# very similar to 'get_league_links'
 def get_team_links(page_data):
     team_links = []
+    team_rows = locate_elements_by_class_name(page_data, row_class_name, 'team rows')
+    for row in team_rows:
+        link_element = locate_elements_by_tag_name(row, link_tag_name, "team link", True)[1]
+        team_links.append({"name": link_element.text, "link": get_direct_link(link_element)})
 
 
 def add_page_teams(browser, league, team_list):
