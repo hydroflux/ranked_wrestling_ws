@@ -1,6 +1,6 @@
 from classes.League import League
 
-from objects.invalid_search import record_invalid_league
+from objects.invalid_search import check_for_results, record_invalid_league
 
 from objects.stats import stats
 
@@ -85,15 +85,10 @@ def report_leagues(season, division):
           f'{division.name} {season.title} season.\n')
 
 
-def check_for_league_results(browser):
-    page_data = get_page_data(browser, False)
-    if not locate_element_by_class_name(page_data, no_records_class, "no records", quick=True): return True
-
-
 def search_league(browser, season, division, league, stats):
     print(f'Searching "{league.name}" for teams...')
     browser.get(league.link)
-    if check_for_league_results(browser):
+    if check_for_results(browser):
         record_league_teams(browser, season, division, league, stats)
     else:
         record_invalid_league(browser, division, league, stats)
