@@ -72,6 +72,11 @@ def update_team_events(team, event_list):
     team.events = events
 
 
+def report_events(league, team):
+    print(f'{str(team.number_events)} events found for the '
+          f'{team.name} {league.name} league.\n')
+
+
 def record_team_events(browser, season, division, league, team, stats):
     # count_events(browser, team)
     event_list = create_event_list(browser, team)
