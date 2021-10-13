@@ -2,7 +2,7 @@ from actions.frame_handling import switch_to_page_frame
 from actions.pages import get_page_data, get_page_handler
 from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
-from variables.general import row_class_name, link_tag_name
+from variables.general import row_class_name, row_data_tag, link_tag_name
 from variables.scripts import next_page_script
 
 
@@ -31,7 +31,12 @@ def get_team_links(page_data):
     team_rows = locate_elements_by_class_name(page_data, row_class_name, 'team rows')
     for row in team_rows:
         link_element = locate_elements_by_tag_name(row, link_tag_name, "team link", True)[1]
-        team_links.append({"name": link_element.text, "link": get_direct_link(link_element)})
+        team_abbreviation = locate_elements_by_tag_name(row, row_data_tag, "team abbreviation")[2]
+        team_links.append({
+            "name": link_element.text,
+            "link": get_direct_link(link_element),
+            "abbreviation": team_abbreviation
+            })
     return team_links
 
 
