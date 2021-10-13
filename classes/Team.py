@@ -2,9 +2,10 @@ class Team:
 
     total_teams = 0
 
-    def __init__(self, name, link, number_events=0, events=None):
+    def __init__(self, name, link, abbreviation, number_events=0, events=None):
         self.name = name
         self.link = link
+        self.abbreviation = abbreviation
         self.number_events = number_events
         self.events = events
 

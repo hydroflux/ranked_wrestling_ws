@@ -1,4 +1,5 @@
 from actions.frame_handling import switch_to_page_frame
+from classes.Team import Team
 from actions.pages import get_page_data, get_page_handler
 from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
@@ -71,8 +72,9 @@ def create_team_list(browser, league):
     return validate_team_list(browser, league, team_list)
 
 
-def update_league_teams():
-    pass
+def update_league_teams(league, team_list):
+    teams = [Team(team["name"], team["link"], team["abbreviation"]) for team in team_list]
+    league.teams = teams
 
 
 def report_teams():
