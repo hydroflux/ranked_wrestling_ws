@@ -68,7 +68,7 @@ def update_team_events(team, event_list):
 
 
 def report_events(league, team):
-    event_names = [event.name for event in league.events]
+    event_names = [event.name for event in team.events]
     all_events = iterate_list(event_names)
     print(f'{str(team.number_events)} events found for the '
           f'{team.name} {league.name} league:')
@@ -93,6 +93,6 @@ def record_events(browser, season, division, league, team, stats):
 def record_team_events(browser, season, division, league, team, stats):
     # count_events(browser, team)
     event_list = create_event_list(browser, team)
-    # update_team_events(team, event_list)
-    # report_teams(league, team)
+    update_team_events(team, event_list)
+    report_events(league, team)
     # return record_events(browser, season, division, league, team, stats)
