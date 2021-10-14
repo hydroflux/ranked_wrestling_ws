@@ -1,4 +1,4 @@
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -22,6 +22,10 @@ def locate_element_by_id(locator, id, type, clickable=False, quick=False):
         return element
     except TimeoutException:
         print_timeout_statement(type)
+    except NoSuchElementException:
+        return False
+    except StaleElementReferenceException:
+        return False
 
 
 def locate_element_by_class_name(locator, class_name, type, clickable=False, quick=False):

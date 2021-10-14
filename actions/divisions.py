@@ -5,7 +5,8 @@ from selenium_utilities.locators import (locate_element_by_id,
                                          locate_elements_by_class_name)
 from selenium_utilities.open import assert_window_title
 
-from settings.general_functions import all_equal, get_list_element_text, script_execution
+from settings.general_functions import all_equal, get_direct_link, get_list_element_text, script_execution
+from settings.timers import short_nap
 
 from variables.general import (alt_division_menu_id, division_menu_id,
                                main_table_divisions_class_name,
@@ -28,6 +29,15 @@ def execute_division_option(browser, alt):
     script_execution(browser, script)
 
 
+def open_division_league_search(browser):
+    browser.switch_to.default_content()
+    switch_to_page_frame(browser)
+    search_button = locate_element_by_id(browser, search_button_id, "search button", True)
+    search_button_script = get_direct_link(search_button, True)
+    script_execution(browser, search_button_script)
+    # short_nap()
+    
+
 def open_division(browser, season, division, alt=False):
     select_division(browser, division, alt)
     execute_division_option(browser, alt)
@@ -49,6 +59,5 @@ def validate_league_divisions(browser):
 
 def open_division_leagues(browser, season, division):
     select_menu_option(browser)
-    switch_to_page_frame(browser)
-    click_button(browser, locate_element_by_id, search_button_id, "search button")
+    open_division_league_search(browser)
     open_division(browser, season, division, alt=True)

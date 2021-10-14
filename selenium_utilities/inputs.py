@@ -9,5 +9,8 @@ def center_element(browser, element):
 
 def click_button(browser, locator_function, attribute, type):
     button = locator_function(browser, attribute, type, True)
+    while not button:
+        print(f'Unable to locate "{type}" button, trying again.')
+        button = locator_function(browser, attribute, type, True)
     center_element(browser, button)
     button.click()

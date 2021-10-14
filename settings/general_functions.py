@@ -17,8 +17,11 @@ def all_equal(iterable):
     return next(group, True) and not next(group, False)
 
 
-def get_direct_link(link_element):
-    return link_element.get_attribute("href")
+def get_direct_link(link_element, onclick=False):
+    if onclick:
+        return link_element.get_attribute('onclick')
+    else:
+        return link_element.get_attribute("href")
 
 
 def iterate_list(list, web_element=None):
