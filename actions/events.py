@@ -66,6 +66,8 @@ def update_team_events(team, event_list):
                     event["time"],
                     event["level"]) for event in event_list]
     team.events = events
+    # Below only necessary while 'count_events' is not a function
+    team.number_events = len(events)
 
 
 def report_events(league, team):
@@ -77,7 +79,7 @@ def report_events(league, team):
 
 
 def search_event(browser, season, division, league, team, event, stats):
-    print(f'Searching "{event.name}" for matches...')
+    print(f'\nSearching "{event.name}" for matches...')
     script_execution(browser, event.link)
     switch_to_event_tab(browser)
     if check_for_results(browser):

@@ -91,7 +91,7 @@ def report_leagues(season, division):
 
 
 def search_league(browser, season, division, league, stats):
-    print(f'Searching "{league.name}" for teams...')
+    print(f'\nSearching "{league.name}" for teams...')
     browser.get(league.link)
     if check_for_results(browser):
         record_league_teams(browser, season, division, league, stats)
