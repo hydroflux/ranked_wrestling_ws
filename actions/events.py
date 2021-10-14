@@ -5,6 +5,7 @@ from objects.invalid_search import check_for_results, record_invalid_event
 from selenium_utilities.locators import (locate_element_by_tag_name,
                                          locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
+from selenium_utilities.window_handler import close_event_tab, switch_to_event_tab
 
 from settings.general_functions import get_direct_link, iterate_list, print_list_by_index, script_execution
 
@@ -78,12 +79,12 @@ def report_events(league, team):
 def search_event(browser, season, division, league, team, event, stats):
     print(f'Searching "{event.name}" for matches...')
     script_execution(browser, event.link)
-    # switch into window
+    switch_to_event_tab(browser)
     if check_for_results(browser):
         record_event_matches(browser, season, division, league, team, event, stats)
     else:
         record_invalid_event(browser, division, league, team, event, stats)
-    # close window
+    close_event_tab(browser)
 
 
 def record_events(browser, season, division, league, team, stats):
