@@ -95,8 +95,6 @@ def search_event(browser, season, division, league, team, event, stats):
         record_invalid_event(browser, division, league, team, event, stats)
     # close window
 
-    
-
 
 def record_events(browser, season, division, league, team, stats):
     return [search_event(browser, season, division, league, team, event, stats) for event in team.events]
