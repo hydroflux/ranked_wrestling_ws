@@ -6,7 +6,7 @@ from objects.stats import stats
 from selenium_utilities.locators import (locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
 
-from settings.general_functions import get_direct_link, print_list, script_execution
+from settings.general_functions import get_direct_link, iterate_list, script_execution
 
 from variables.general import link_tag_name, row_class_name
 from variables.scripts import next_page_script
@@ -85,7 +85,7 @@ def report_leagues(season, division):
     league_names = [league.name for league in division.leagues]
     print(f'{str(division.number_leagues)} leagues found for the '
           f'{division.name} {season.title} season:\n'
-          f'{print_list(league_names)}\n')
+          f'{print(iterate_list(league_names))}\n')
 
 
 def search_league(browser, season, division, league, stats):

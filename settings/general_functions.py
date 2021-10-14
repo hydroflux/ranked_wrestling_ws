@@ -21,7 +21,7 @@ def get_direct_link(link_element):
     return link_element.get_attribute("href")
 
 
-def print_list(list, web_element=None):
+def iterate_list(list, web_element=None):
     if web_element is None:
         return [(list.index(element) + 1, element, '\n-------------------------') for element in list]
     else:
