@@ -4,6 +4,7 @@
 
 - [ ] Add timers
 - [ ] Keep all higher level attributes on the lower level class instances in order to avoid passing as many variables back and forth while recording
+- [ ] Fix 'NoSuchElementException', 'NoSuchWindowException', and 'StaleElementException' appearing during some login processes
 
 ## Actions
 

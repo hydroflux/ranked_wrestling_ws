@@ -23,6 +23,13 @@ def get_direct_link(link_element):
 
 def iterate_list(list, web_element=None):
     if web_element is None:
-        return [(list.index(element) + 1, element, '\n-------------------------') for element in list]
+        return [(f'{element}') for element in list]
     else:
-        return [(list.index(element) + 1, element.text, '\n-------------------------') for element in list]
+        return [(f'{element.text}') for element in list]
+
+
+def print_list_by_index(list, web_element=None):
+    if web_element is None:
+        [print(list.index(element), element, '\n-------------------------') for element in list]
+    else:
+        [print(list.index(element), element.text, '\n-------------------------') for element in list]

@@ -5,7 +5,7 @@ from objects.invalid_search import check_for_results, record_invalid_team
 from selenium_utilities.locators import (locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
 
-from settings.general_functions import get_direct_link, iterate_list, script_execution
+from settings.general_functions import get_direct_link, iterate_list, print_list_by_index, script_execution
 
 from variables.general import link_tag_name, row_class_name, row_data_tag
 from variables.scripts import next_page_script
@@ -91,9 +91,10 @@ def update_league_teams(league, team_list):
 
 def report_teams(division, league):
     team_names = [team.name for team in league.teams]
+    all_teams = iterate_list(team_names)
     print(f'{str(league.number_teams)} teams found for the '
-          f'{league.name} {division.name} division:\n'
-          f'{print(iterate_list(team_names))}\n')
+          f'{league.name} {division.name} division:')
+    print_list_by_index(all_teams)
 
 
 def search_team(browser, season, division, league, team, stats):
