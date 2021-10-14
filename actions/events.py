@@ -13,19 +13,6 @@ from variables.general import link_tag_name, row_class_name, row_data_tag
 from actions.matches import record_event_matches
 from actions.pages import get_page_data, get_page_handler
 
-# def get_number_events(page_handler):
-#     handler_text = page_handler.text
-#     return int(handler_text[handler_text.rfind(' ') + 1:])
-
-
-# def report_number_teams(team):
-#     print(f'{str(team.number_events)} total events located for the '
-#           f'"{team.name}" Team.')
-
-
-# def count_events(browser, team):
-#     page_handler = get_page_handler(browser)
-
 
 def build_event_link(event_information):
     link_element = locate_element_by_tag_name(event_information[2], link_tag_name, "event link", True)
