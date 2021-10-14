@@ -6,7 +6,7 @@ from selenium_utilities.locators import (locate_element_by_tag_name,
                                          locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
 
-from settings.general_functions import get_direct_link, script_execution
+from settings.general_functions import get_direct_link, print_list, script_execution
 
 from variables.general import link_tag_name, row_class_name, row_data_tag
 
@@ -81,8 +81,11 @@ def update_team_events(team, event_list):
 
 
 def report_events(league, team):
+    event_names = [event.name for event in league.events]
+    list_events = 
     print(f'{str(team.number_events)} events found for the '
-          f'{team.name} {league.name} league.\n')
+          f'{team.name} {league.name} league:\n'
+          f'{print(print_list(event_names))}\n')
 
 
 def search_event(browser, season, division, league, team, event, stats):
