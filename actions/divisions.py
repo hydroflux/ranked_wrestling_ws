@@ -30,12 +30,12 @@ def execute_division_option(browser, alt):
 
 
 def open_division_league_search(browser):
+    short_nap()
     browser.switch_to.default_content()
     switch_to_page_frame(browser)
     search_button = locate_element_by_id(browser, search_button_id, "search button", True)
     search_button_script = get_direct_link(search_button, True)
     script_execution(browser, search_button_script)
-    # short_nap()
     
 
 def open_division(browser, season, division, alt=False):

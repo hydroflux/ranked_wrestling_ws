@@ -20,12 +20,12 @@ def switch_to_tab(browser, window, type):
 
 def switch_to_event_tab(browser):
     windows = get_window_handles(browser)
-    switch_to_tab(browser, windows[1], "event")
+    switch_to_tab(browser, 1, "event")
     return windows
 
 
 def close_event_tab(browser):
-    windows = switch_to_event_tab(browser)
+    switch_to_event_tab(browser)
     browser.close()
-    switch_to_tab(browser, windows[0], "main")
+    switch_to_tab(browser, 0, "main")
     

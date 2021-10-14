@@ -98,4 +98,4 @@ def record_team_events(browser, season, division, league, team, stats):
     event_list = create_event_list(browser, team)
     update_team_events(team, event_list)
     report_events(league, team)
-    # return record_events(browser, season, division, league, team, stats)
+    return record_events(browser, season, division, league, team, stats)
