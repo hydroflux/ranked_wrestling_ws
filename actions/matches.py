@@ -1,3 +1,6 @@
+from settings.general_functions import get_direct_link, script_execution
+from settings.printer import iterate_list, print_list_by_index
+
 def get_match_links(page_data):
     pass
 

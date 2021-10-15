@@ -5,7 +5,8 @@ from objects.invalid_search import check_for_results, record_invalid_team
 from selenium_utilities.locators import (locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
 
-from settings.general_functions import get_direct_link, iterate_list, print_list_by_index, script_execution
+from settings.general_functions import get_direct_link, script_execution
+from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import link_tag_name, row_class_name, row_data_tag
 from variables.scripts import next_page_script
