@@ -36,6 +36,7 @@
 
 ## Classes & Objects
 
+- [ ] Create nested classes
 - [ ] Do a gap analysis of the "Stats" class vs. the 'stats' object to determine the best way to proceed
 - [ ] Benefits of using "Stats" class: Hold ids, class_names, and tag_names in the class instance
 
