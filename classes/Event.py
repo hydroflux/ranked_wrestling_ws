@@ -3,7 +3,8 @@ class Event:
     total_events = 0
 
     def __init__(self, name, link, date, time, level,
-                 type, number_matches=0, matches=None
+                 type, is_tournament=False,
+                 number_matches=0, matches=None
         ):
         self.name = name
         self.link = link
@@ -11,6 +12,7 @@ class Event:
         self.time = time
         self.level = level
         self.type = type
+        self.is_tournament = is_tournament
         self.number_matches = number_matches
         self.matches = matches
 
