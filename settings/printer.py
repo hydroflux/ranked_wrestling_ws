@@ -19,6 +19,7 @@ def create_printer():
     return pprint.PrettyPrinter(indent=4, sort_dicts=True, compact=False)
 
 
-def print_object(object):
+def print_class_instance(instance):
     printer = create_printer()
-    printer.pprint(object)
+    attributes = vars(instance)
+    printer.pprint(attributes)

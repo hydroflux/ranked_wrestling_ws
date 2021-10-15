@@ -2,12 +2,15 @@ class Event:
 
     total_events = 0
 
-    def __init__(self, name, link, date, time, level, number_matches=0, matches=None):
+    def __init__(self, name, link, date, time, level,
+                 type, number_matches=0, matches=None
+        ):
         self.name = name
         self.link = link
         self.date = date
         self.time = time
         self.level = level
+        self.type = type
         self.number_matches = number_matches
         self.matches = matches
 
