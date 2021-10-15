@@ -22,17 +22,3 @@ def get_direct_link(link_element, onclick=False):
         return link_element.get_attribute('onclick')
     else:
         return link_element.get_attribute("href")
-
-
-def iterate_list(list, web_element=None):
-    if web_element is None:
-        return [(f'{element}') for element in list]
-    else:
-        return [(f'{element.text}') for element in list]
-
-
-def print_list_by_index(list, web_element=None):
-    if web_element is None:
-        [print(list.index(element), element, '\n-------------------------') for element in list]
-    else:
-        [print(list.index(element), element.text, '\n-------------------------') for element in list]
