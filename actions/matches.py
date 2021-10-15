@@ -1,8 +1,15 @@
+from actions.pages import get_page_data
 from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
-def get_match_links(page_data):
+
+def build_match_link(match_information):
     pass
+
+
+def get_match_links(browser):
+    match_links = []
+    page_data = get_page_data(browser)
 
 
 def add_page_matches(browser, event, match_list):

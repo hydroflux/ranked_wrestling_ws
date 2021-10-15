@@ -37,8 +37,9 @@ def count_leagues(browser, division):
 #     pass
 
 
-def get_league_links(page_data):
+def get_league_links(browser):
     league_links = []
+    page_data = get_page_data(browser)
     league_rows = locate_elements_by_class_name(page_data, row_class_name, 'league rows')
     for row in league_rows:
         link_element = locate_elements_by_tag_name(row, link_tag_name, "league link", True)[1]
@@ -47,8 +48,7 @@ def get_league_links(page_data):
 
 
 def add_page_leagues(browser, division, league_list):
-    page_data = get_page_data(browser)
-    league_links = get_league_links(page_data)
+    league_links = get_league_links(browser)
     league_list.extend(league_links)
     print(f'Added {str(len(league_links))} leagues to "{division.name}" leagues list.')
 

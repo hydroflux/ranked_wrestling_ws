@@ -40,8 +40,9 @@ def count_teams(browser, league):
 
 
 # very similar to 'get_league_links'
-def get_team_links(page_data):
+def get_team_links(browser):
     team_links = []
+    page_data = get_page_data(browser, False)
     team_rows = locate_elements_by_class_name(page_data, row_class_name, 'team rows')
     for row in team_rows:
         link_element = locate_elements_by_tag_name(row, link_tag_name, "team link", True)[1]
@@ -55,8 +56,7 @@ def get_team_links(page_data):
 
 
 def add_page_teams(browser, league, team_list):
-    page_data = get_page_data(browser, False)
-    team_links = get_team_links(page_data)
+    team_links = get_team_links(browser)
     team_list.extend(team_links)
     print(f'Added {str(len(team_links))} teams to "{league.name}" team list.')
 
