@@ -16,30 +16,31 @@ from actions.matches import record_event_matches
 from actions.pages import get_page_data, get_page_handler
 
 
-def build_event_link(event_information):
+def build_event_link(browser, event_information):
     link_element = locate_element_by_tag_name(event_information[2], link_tag_name, "event link", True)
     event_link = {
         "name": link_element.text,
         "link": get_direct_link(link_element),
         "date": event_information[1].text,
         "time": event_information[3].text,
-        "level": event_information[4].text
+        "level": event_information[4].text,
+        "type": browser.title
     }
     return event_link
 
 
-def get_event_links(page_data):
+def get_event_links(browser):
     event_links = []
+    page_data = get_page_data(browser, False)
     event_rows = locate_elements_by_class_name(page_data, row_class_name, 'event rows')
     for row in event_rows:
         event_information = locate_elements_by_tag_name(row, row_data_tag, "event information")
-        event_links.append(build_event_link(event_information))
+        event_links.append(build_event_link(browser, event_information))
     return event_links
 
 
 def add_page_events(browser, team, event_list):
-    page_data = get_page_data(browser, False)
-    event_links = get_event_links(page_data)
+    event_links = get_event_links(browser)
     event_list.extend(event_links)
     print(f'Added {str(len(event_links))} events to "{team.name}" team list.')
 
@@ -65,7 +66,8 @@ def update_team_events(team, event_list):
                     event["link"],
                     event["date"],
                     event["time"],
-                    event["level"]) for event in event_list]
+                    event["level"],
+                    event["type"]) for event in event_list]
     team.events = events
     # Below only necessary while 'count_events' is not a function
     team.number_events = len(events)
