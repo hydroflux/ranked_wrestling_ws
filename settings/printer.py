@@ -29,6 +29,7 @@ def get_nested_attributes(attributes):
         if type(values) is list:
             nested_attributes = []
             for attribute in values:
+                nested_attribute = create_instance_copy(attribute)
                 if type(attribute) is dict:
                     nested_attribute = get_nested_attributes(attribute)
                 else:
