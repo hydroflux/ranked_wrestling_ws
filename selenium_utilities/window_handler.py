@@ -10,22 +10,23 @@ def get_window_handles(browser):
         return windows
 
 
-def switch_to_tab(browser, window, type):
+def switch_to_tab(browser, window, type, alt):
     try:
         browser.switch_to.window(browser.window_handles[window])
     except WebDriverException:
-        print(f'Failed to switch to "{type}" window tab, please review.')
-        input()
+        if not alt:
+            print(f'Failed to switch to "{type}" window tab, please review.')
+            input()
 
 
-def switch_to_event_tab(browser):
+def switch_to_event_tab(browser, alt=False):
     windows = get_window_handles(browser)
-    switch_to_tab(browser, 1, "event")
+    switch_to_tab(browser, 1, "event", alt)
     return windows
 
 
 def close_event_tab(browser):
-    switch_to_event_tab(browser)
+    switch_to_event_tab(browser, alt=True)
     browser.close()
     switch_to_tab(browser, 0, "main")
     
