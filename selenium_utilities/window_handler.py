@@ -4,7 +4,7 @@ from selenium.common.exceptions import WebDriverException
 def get_window_handles(browser):
     windows = browser.window_handles
     if len(windows) != 2:
-        print(f'Browser located "{str(windows)}" tabs, please review.')
+        print(f'Browser located "{str(len(windows))}" tabs, please review.')
         input()
     else:
         return windows
