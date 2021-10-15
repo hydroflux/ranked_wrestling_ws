@@ -33,7 +33,6 @@
 
 - [ ] Create a "Matches" class
 
-
 ## Classes & Objects
 
 - [ ] Create nested classes

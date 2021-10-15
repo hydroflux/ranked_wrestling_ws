@@ -24,19 +24,30 @@ def create_printer():
     return pprint.PrettyPrinter(indent=4, sort_dicts=True, compact=False)
 
 
-def get_attributes(instance):
-    attributes = vars(instance)
+def get_nested_attributes(attributes):
     for key, values in attributes.items():
         if type(values) is list:
             nested_attributes = []
-            for nested_attribute in values:
-                nested_attributes.append(vars(nested_attribute))
+            for attribute in values:
+                if type(attribute) is dict:
+                    nested_attribute = get_nested_attributes(attribute)
+                else:
+                    nested_attribute = vars(attribute)
+                if hasattr(nested_attribute, '__class__'):
+                    nested_attribute = get_nested_attributes(nested_attribute)
+                nested_attributes.append(nested_attribute)
             attributes[key] = nested_attributes
     return attributes
 
 
+def get_attributes(instance):
+    attributes = vars(instance)
+    get_nested_attributes(attributes)
+    return attributes
+
+
 def print_class_instance(instance):
-    copy = create_instance_copy(instance)
+    instance_copy = create_instance_copy(instance)
     printer = create_printer()
-    attributes = get_attributes(copy)
+    attributes = get_attributes(instance_copy)
     printer.pprint(attributes)
