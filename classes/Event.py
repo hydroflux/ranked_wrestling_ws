@@ -21,3 +21,4 @@ class Event:
     def __str__(self):
         return (f'{self.name} - {self.level} ({self.date} @ {self.time}): \n'
                 f'{self.number_matches} matches ({self.link})')
+    

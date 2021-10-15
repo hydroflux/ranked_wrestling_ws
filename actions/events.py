@@ -10,7 +10,7 @@ from selenium_utilities.window_handler import close_event_tab, switch_to_event_t
 from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
-from variables.general import link_tag_name, row_class_name, row_data_tag
+from variables.general import link_tag_name, row_class_name, row_data_tag, event_types
 
 from actions.matches import record_event_matches
 from actions.pages import get_page_data, get_page_handler
@@ -81,15 +81,31 @@ def report_events(league, team):
     print_list_by_index(all_events)
 
 
+def handle_event_type(browser, season, division, league, team, event, stats):
+    if event.type == event_types['single_event']:
+        script_execution(browser, event.link)
+        switch_to_event_tab(browser)
+        if check_for_results(browser):
+            record_event_matches(browser, season, division, league, team, event, stats)
+        else:
+            record_invalid_event(browser, division, league, team, event, stats)
+        close_event_tab(browser)
+    elif event.type == event_types['dual_event']:
+        pass
+    elif event.type == event_types['tournament']:
+        pass
+
+
 def search_event(browser, season, division, league, team, event, stats):
     print(f'\nSearching "{event.name}" for matches...')
-    script_execution(browser, event.link)
-    switch_to_event_tab(browser)
-    if check_for_results(browser):
-        record_event_matches(browser, season, division, league, team, event, stats)
-    else:
-        record_invalid_event(browser, division, league, team, event, stats)
-    close_event_tab(browser)
+    handle_event_type(browser, season, division, league, team, event, stats)
+    # script_execution(browser, event.link)
+    # switch_to_event_tab(browser)
+    # if check_for_results(browser):
+    #     record_event_matches(browser, season, division, league, team, event, stats)
+    # else:
+    #     record_invalid_event(browser, division, league, team, event, stats)
+    # close_event_tab(browser)
 
 
 def record_events(browser, season, division, league, team, stats):
