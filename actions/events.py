@@ -24,7 +24,6 @@ def build_event_link(browser, event_information):
         "date": event_information[1].text,
         "time": event_information[3].text,
         "level": event_information[4].text,
-        "type": browser.title
     }
     return event_link
 
@@ -66,8 +65,7 @@ def update_team_events(team, event_list):
                     event["link"],
                     event["date"],
                     event["time"],
-                    event["level"],
-                    event["type"]) for event in event_list]
+                    event["level"]) for event in event_list]
     team.events = events
     # Below only necessary while 'count_events' is not a function
     team.number_events = len(events)
@@ -79,33 +77,35 @@ def report_events(league, team):
     print(f'{str(team.number_events)} events found for the '
           f'{team.name} {league.name} league:')
     print_list_by_index(all_events)
+    
+
+def open_event(browser, event):
+    script_execution(browser, event.link)
+    switch_to_event_tab(browser)
 
 
 def handle_event_type(browser, season, division, league, team, event, stats):
+    event.type = browser.title
     if event.type == event_types['single_event']:
-        script_execution(browser, event.link)
-        switch_to_event_tab(browser)
-        if check_for_results(browser):
-            record_event_matches(browser, season, division, league, team, event, stats)
-        else:
-            record_invalid_event(browser, division, league, team, event, stats)
-        close_event_tab(browser)
+        record_event_matches(browser, season, division, league, team, event, stats)
     elif event.type == event_types['dual_event']:
         pass
     elif event.type == event_types['tournament']:
         pass
+    else:
+        print(f'Browser encountered an unknown event type of "{event.type}", please review...')
+        input()
 
 
 def search_event(browser, season, division, league, team, event, stats):
     print(f'\nSearching "{event.name}" for matches...')
+    open_event(browser, event)
     handle_event_type(browser, season, division, league, team, event, stats)
-    # script_execution(browser, event.link)
-    # switch_to_event_tab(browser)
-    # if check_for_results(browser):
-    #     record_event_matches(browser, season, division, league, team, event, stats)
-    # else:
-    #     record_invalid_event(browser, division, league, team, event, stats)
-    # close_event_tab(browser)
+    if check_for_results(browser):
+        handle_event_type(browser, season, division, league, team, event, stats)
+    else:
+        record_invalid_event(browser, division, league, team, event, stats)
+    close_event_tab(browser)
 
 
 def record_events(browser, season, division, league, team, stats):
