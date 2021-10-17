@@ -26,7 +26,7 @@ def switch_to_event_tab(browser, alt=False):
 
 
 def close_event_tab(browser):
-    switch_to_event_tab(browser, alt=True)
-    browser.close()
+    if switch_to_event_tab(browser, alt=True):
+        browser.close()
     switch_to_tab(browser, 0, "main")
     
