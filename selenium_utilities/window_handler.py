@@ -17,12 +17,16 @@ def switch_to_tab(browser, window, type, alt):
         if not alt:
             print(f'Failed to switch to "{type}" window tab, please review.')
             input()
+        else:
+            return False
 
 
 def switch_to_event_tab(browser, alt=False):
     windows = get_window_handles(browser)
-    switch_to_tab(browser, 1, "event", alt)
-    return windows
+    if not switch_to_tab(browser, 1, "event", alt):
+        return False
+    else:
+        return windows
 
 
 def close_event_tab(browser):
