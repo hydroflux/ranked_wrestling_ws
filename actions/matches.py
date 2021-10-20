@@ -26,7 +26,12 @@ def handle_event_level(match, match_summary):
 
 def handle_unknown_values(match, option=None):
     unknown = unknown_values[0]
-    if option == 'winning summary':
+    if option is None:
+        match.winner = unknown
+        match.winning_team = unknown
+        match.loser = unknown
+        match.losing_team = unknown
+    elif option == 'winning summary':
         match.winner = unknown
         match.winning_team = unknown
     elif option == 'losing summary':
@@ -51,7 +56,10 @@ def handle_event_participants(match, summary):
             match.loser = losing_summary[:(losing_summary.find(participant_flags["1"]) - 1)]
             match.losing_team = losing_summary[(losing_summary.find(participant_flags["1"]) + 1): -1]
     elif summary.endswith(summary_flags["flag_2"]):
-        pass
+        if round_flag in summary:
+            match.round = summary[: summary.index(round_flag)]
+        handle_unknown_values(match)
+        match.result = summary_flags["flag_2"]
     elif summary.endswith(summary_flags["flag_3"]):
         pass
     elif summary_flags["flag_4"] in summary:
