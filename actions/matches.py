@@ -229,7 +229,12 @@ def report_matches(team, event):
     print_list_by_index(all_matches)
 
 
+def record_matches(season, division, league, team, event, stats):
+    pass
+
+
 def record_event_matches(browser, season, division, league, team, event, stats):
     match_list = create_match_list(browser, event)
     update_event_matches(event, match_list)
     report_matches(team, event)
+    record_matches(season, division, league, team, event, stats)
