@@ -49,7 +49,7 @@ def handle_unknown_values(match, option=None):
 
 
 def handle_match_point(match):
-    if match.point != '':
+    if match.point is not None:
         match.winning_point, match.losing_point = match.point.split('-')
 
 
