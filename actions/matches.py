@@ -61,7 +61,10 @@ def handle_event_participants(match, summary):
         handle_unknown_values(match)
         match.result = summary_flags["flag_2"]
     elif summary.endswith(summary_flags["flag_3"]):
-        pass
+        if round_flag in summary:
+            match.round = summary[: summary.index(round_flag)]
+        handle_unknown_values(match)
+        match.result = summary_flags["flag_3"]
     elif summary_flags["flag_4"] in summary:
         pass
     elif summary_flags["flag_5"] in summary:
