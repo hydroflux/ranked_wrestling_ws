@@ -232,6 +232,37 @@ def report_matches(team, event):
 
 def record_stat(season, division, league, team, event, match, stats):
     stat = Stat(
+        state=division.state,
+        division_name=division.name,
+        division_abbreviation=division.division_abbreviation,
+        number_leagues=division.number_leagues,
+        league_name=league.name,
+        league_link=league.link,
+        number_teams=league.number_teams,
+        team_name=team.name,
+        team_link=team.link,
+        team_abbreviation=team.abbreviation,
+        number_events=team.number_events,
+        event_name=event.name,
+        date=event.date,
+        time=event.time,
+        level=event.level,
+        type=event.type,
+        number_matches=event.number_matches,
+        weight=match.weight,
+        summary=match.summary,
+        stat_flag=match.stat_flag,
+        tw_event=match.tw_event,
+        match_level=match.level,
+        round=match.round,
+        winning_team= match.winning_team,
+        winner=match.winner,
+        losing_team=match.losing_team,
+        loser=match.loser,
+        results=match.results,
+        match_time=match.match_time,
+        winning_point=match.winning_point,
+        losing_point=match.losing_point,
     )
     stats.append(stat)
 
