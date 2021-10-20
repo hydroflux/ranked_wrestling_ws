@@ -230,7 +230,7 @@ def report_matches(team, event):
     print_list_by_index(all_matches)
 
 
-def record_stat(season, division, league, team, event, match, stats):
+def record_stat(division, league, team, event, match, stats):
     stat = Stat(
         state=division.state,
         division_name=division.name,
@@ -267,13 +267,14 @@ def record_stat(season, division, league, team, event, match, stats):
     stats.append(stat)
 
 
-def record_match_list(season, division, league, team, event, match_list, stats):
+def record_match_list(division, league, team, event, match_list, stats):
     for match in match_list:
-        record_stat(season, division, league, team, event, match, stats)
+        record_stat(division, league, team, event, match, stats)
+    return stats
 
 
-def record_event_matches(browser, season, division, league, team, event, stats):
+def record_event_matches(browser, division, league, team, event, stats):
     match_list = create_match_list(browser, event)
     update_event_matches(event, match_list)
     report_matches(team, event)
-    record_match_list(season, division, league, team, event, match_list, stats)
+    return record_match_list(division, league, team, event, match_list, stats)

@@ -84,10 +84,10 @@ def open_event(browser, event):
     switch_to_event_tab(browser)
 
 
-def handle_event_type(browser, season, division, league, team, event, stats):
+def handle_event_type(browser, division, league, team, event, stats):
     event.type = browser.title
     if event.type == event_types['single_event']:
-        record_event_matches(browser, season, division, league, team, event, stats)
+        record_event_matches(browser, division, league, team, event, stats)
     elif event.type == event_types['dual_event']:
         pass
     elif event.type == event_types['tournament']:
@@ -97,24 +97,24 @@ def handle_event_type(browser, season, division, league, team, event, stats):
         input()
 
 
-def search_event(browser, season, division, league, team, event, stats):
+def search_event(browser, division, league, team, event, stats):
     print(f'\nSearching "{event.name}" for matches...')
     open_event(browser, event)
-    handle_event_type(browser, season, division, league, team, event, stats)
+    handle_event_type(browser, division, league, team, event, stats)
     if check_for_results(browser):
-        handle_event_type(browser, season, division, league, team, event, stats)
+        handle_event_type(browser, division, league, team, event, stats)
     else:
         record_invalid_event(browser, division, league, team, event, stats)
     close_event_tab(browser)
 
 
-def record_events(browser, season, division, league, team, stats):
-    return [search_event(browser, season, division, league, team, event, stats) for event in team.events]
+def record_events(browser, division, league, team, stats):
+    return [search_event(browser, division, league, team, event, stats) for event in team.events]
 
 
-def record_team_events(browser, season, division, league, team, stats):
+def record_team_events(browser, division, league, team, stats):
     # count_events(browser, team)
     event_list = create_event_list(browser, team)
     update_team_events(team, event_list)
     report_events(league, team)
-    return record_events(browser, season, division, league, team, stats)
+    return record_events(browser, division, league, team, stats)
