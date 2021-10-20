@@ -5,7 +5,7 @@ from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import level_values, summary_flags, round_flag, unknown_values
+from variables.matches import level_values, summary_flags, round_flag, unknown_values, participant_flags
 
 
 def handle_event_level(match, match_summary):
@@ -25,9 +25,13 @@ def handle_event_level(match, match_summary):
 
 
 def handle_unknown_values(match, option=None):
+    unknown = unknown_values[0]
     if option == 'winning summary':
-        match.winner = unknown_values[0]
-        match.winning_team = unknown_values[0]
+        match.winner = unknown
+        match.winning_team = unknown
+    elif option == 'losing summary':
+        match.loser = unknown
+        match.losing_team = unknown
 
 
 def handle_event_participants(match, summary):
@@ -38,6 +42,14 @@ def handle_event_participants(match, summary):
             winning_summary = winning_summary[(len(match.round) + 3):]
         if winning_summary in unknown_values:
             handle_unknown_values(match, 'winning summary')
+        else:
+            match.winner = winning_summary[:(winning_summary.find(participant_flags["1"]) - 1)]
+            match.winning_team = winning_summary[(winning_summary.find(participant_flags["1"]) + 1): -1]
+        if losing_summary in unknown_values:
+            handle_unknown_values(match, 'losing summary')
+        else:
+            match.loser = losing_summary[:(losing_summary.find(participant_flags["1"]) - 1)]
+            match.losing_team = losing_summary[(losing_summary.find(participant_flags["1"]) + 1): -1]
     elif summary.endswith(summary_flags["flag_2"]):
         pass
     elif summary.endswith(summary_flags["flag_3"]):
