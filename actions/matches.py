@@ -1,5 +1,5 @@
 from actions.pages import get_page_data
-from selenium_utilities.locators import locate_element_by_class_name, locate_elements_by_tag_name
+from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
@@ -7,13 +7,19 @@ from variables.general import row_class_name, row_data_tag
 
 
 def build_match_information(match_information):
-    pass
+    match_information = {
+        "weight": match_information[1].text,
+        "summary": match_information[2].text,
+        "stats": match_information[3].text,
+        "tw_event": match_information[4].text
+    }
+    return match_information
 
 
 def get_match_summary_information(browser):
     match_summary_information = []
     page_data = get_page_data(browser, False)
-    match_rows = locate_element_by_class_name(page_data, row_class_name, 'match rows')
+    match_rows = locate_elements_by_class_name(page_data, row_class_name, 'match rows')
     for row in match_rows:
         match_information = locate_elements_by_tag_name(row, row_data_tag, "match information")
         match_summary_information.append(build_match_information(match_information))
