@@ -10,7 +10,7 @@ def build_match_information(match_information):
     match_information = {
         "weight": match_information[1].text,
         "summary": match_information[2].text,
-        "stats": match_information[3].text,
+        "stat_flag": match_information[3].text,
         "tw_event": match_information[4].text
     }
     return match_information

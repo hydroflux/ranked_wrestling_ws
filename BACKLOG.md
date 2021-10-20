@@ -32,7 +32,6 @@
 
 ### Matches
 
-- [ ] Create a "Matches" class
 - [ ] Create a method to check the match headers before creating a 'Match' object
 
 ## Classes & Objects
