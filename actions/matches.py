@@ -6,12 +6,26 @@ from settings.printer import iterate_list, print_list_by_index
 from variables.general import row_class_name, row_data_tag
 
 
-def build_match_information(match_information):
+def split_match_summary_information(match_summary):
+    pass
+
+
+def build_single_match_information(match_information):
+    match_summary = match_information[2].text 
     match_information = {
         "weight": match_information[1].text,
-        "summary": match_information[2].text,
+        "summary": match_summary,
         "stat_flag": match_information[3].text,
-        "tw_event": match_information[4].text
+        "tw_event": match_information[4].text,
+        "rounds": '',
+        "winning_team": '',
+        "winner": '',
+        "losing_team": '',
+        "loser": '',
+        "results": '',
+        "time": '',
+        "winning_point": '',
+        "losing_point": ''
     }
     return match_information
 
@@ -22,7 +36,7 @@ def get_match_summary_information(browser):
     match_rows = locate_elements_by_class_name(page_data, row_class_name, 'match rows')
     for row in match_rows:
         match_information = locate_elements_by_tag_name(row, row_data_tag, "match information")
-        match_summary_information.append(build_match_information(match_information))
+        match_summary_information.append(build_single_match_information(match_information))
     return match_summary_information
 
 
