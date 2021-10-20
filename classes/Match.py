@@ -2,10 +2,10 @@ class Match:
 
     total_matches = 0
 
-    def __init__(self, weight, summary, stat_flag, tw_event, level=None,
-                 rounds=None, winning_team=None, winner=None,
-                 losing_team=None, loser=None, results=None,
-                 time=None, winning_point=None, losing_point=None
+    def __init__(self, weight, summary, stat_flag, tw_event, level='',
+                 rounds='', winning_team='', winner='',
+                 losing_team='', loser='', results='',
+                 time='', winning_point='', losing_point=''
     ):
         self.weight = weight
         self.summary = summary
