@@ -221,6 +221,15 @@ def update_event_matches(event, match_list):
     event.number_matches = len(match_list)
 
 
+def report_matches(team, event):
+    match_summaries = [match.summary for match in event.matches]
+    all_matches = iterate_list(match_summaries)
+    print(f'{str(event.number_matches)} matches found for the '
+          f'"{event.name}" for "{team.name}":')
+    print_list_by_index(all_matches)
+
+
 def record_event_matches(browser, season, division, league, team, event, stats):
     match_list = create_match_list(browser, event)
     update_event_matches(event, match_list)
+    report_matches(team, event)
