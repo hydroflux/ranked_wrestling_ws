@@ -5,7 +5,7 @@ from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import level_values, summary_flags, round_flag, unknown_values, participant_flags
+from variables.matches import level_values, summary_flags, round_flag, unknown_values, participant_flags, result_options
 
 
 def handle_event_level(match, match_summary):
@@ -44,35 +44,86 @@ def handle_unknown_values(match, option=None):
         match.losing_team = unknown
 
 
+def split_match_result(match, result):
+    if result.startswith(result_options['flag_1']):
+        match.result = result_options["value_1"]
+        match.point = result[4:]
+    elif result == result_options['flag_2']:
+        match.result = result_options['value_2']
+    elif result == result_options['flag_3']:
+        match.result = result_options['value_3']
+    elif result.startswith(result_options['flag_4']):
+        match.result = result_options['value_4']
+        match.time = result[5:]
+    elif result == result_options['flag_5']:
+        match.result = result_options['value_5']
+    elif result == result_options['flag_6']:
+        match.result = result_options['value_6']
+    elif result == result_options['flag_7']:
+        match.result = result_options['value_7']
+    elif result.startswith(result_options['flag_8']):
+        match.result = result_options['value_8']
+        match.point = result[3:]
+    elif result == result_options['flag_9']:
+        match.result = result_options['value_9']
+    elif result.startswith(result_options['flag_10']):
+        if result.startswith(result_options['flag_11']):
+            match.result = result_options['value_11']
+            match.time = result[12:]
+        else:
+            match.result = result_options['value_10']
+            match.point = result[5:]
+    elif result.startswith('flag_12'):
+        if result.startswith(result_options['flag_13']):
+            match.result = result_options['value_13']
+            match.time = result[12:]
+        else:
+            match.result = result_options['value_12']
+            match.point = result[5:]
+    elif result.startswith(result_options['flag_14']):
+        match.result = result_options['value_14']
+        match.time = result[(result.rfind(' ') + 1):]
+        match.point = result[3: result.rfind(' ')]
+    elif result.startswith(result_options['flag_15']):
+        match.result = result_options['value_15']
+        match.point = result[4:]
+    else:
+        match.result = result
+
+
 def handle_event_participants(match, summary):
-    if summary_flags["flag_1"] in summary:
-        winning_summary, losing_summary = summary.split(summary_flags["flag_1"])
+    if summary_flags['flag_1'] in summary:
+        winning_summary, losing_summary = summary.split(summary_flags['flag_1'])
         if round_flag in winning_summary:
             match.round = winning_summary[:winning_summary.index(round_flag)]
             winning_summary = winning_summary[(len(match.round) + 3):]
         if winning_summary in unknown_values:
             handle_unknown_values(match, 'winning summary')
         else:
-            match.winner = winning_summary[:(winning_summary.find(participant_flags["1"]) - 1)]
-            match.winning_team = winning_summary[(winning_summary.find(participant_flags["1"]) + 1): -1]
+            match.winner = winning_summary[:(winning_summary.find(participant_flags['1']) - 1)]
+            match.winning_team = winning_summary[(winning_summary.find(participant_flags['1']) + 1): -1]
         if losing_summary in unknown_values:
             handle_unknown_values(match, 'losing summary')
         else:
-            match.loser = losing_summary[:(losing_summary.find(participant_flags["1"]) - 1)]
-            match.losing_team = losing_summary[(losing_summary.find(participant_flags["1"]) + 1): -1]
-    elif summary.endswith(summary_flags["flag_2"]):
+            match.loser = losing_summary[:(losing_summary.find(participant_flags['1']) - 1)]
+            match.losing_team = losing_summary[(losing_summary.find(participant_flags['1']) + 1): -1]
+    elif summary.endswith(summary_flags['flag_2']):
         check_for_round_flag(match, summary)
         handle_unknown_values(match)
-        match.result = summary_flags["flag_2"]
-    elif summary.endswith(summary_flags["flag_3"]):
+        match.result = summary_flags['flag_2']
+    elif summary.endswith(summary_flags['flag_3']):
         check_for_round_flag(match, summary)
         handle_unknown_values(match)
-        match.result = summary_flags["flag_3"]
-    elif summary_flags["flag_4"] in summary:
+        match.result = summary_flags['flag_3']
+    elif summary_flags['flag_4'] in summary:
         check_for_round_flag(match, summary)
-    elif summary_flags["flag_5"] in summary:
+        handle_unknown_values(match)
+        if participant_flags['1'] in summary:
+            result = summary[(summary.find(participant_flags['1']) + 1): -1]
+            split_match_result(match, result)
+    elif summary_flags['flag_5'] in summary:
         pass
-    elif summary.endswith(summary_flags["flag_6"]):
+    elif summary.endswith(summary_flags['flag_6']):
         pass
 
 
