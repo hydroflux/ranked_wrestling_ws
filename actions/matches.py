@@ -31,5 +31,10 @@ def create_match_list(browser, event):
     return add_matches(browser, event, match_list)
 
 
+def update_event_matches(event, match_list):
+    pass
+    # event.number_matches = len(matches)
+
+
 def record_event_matches(browser, season, division, league, team, event, stats):
     match_list = create_match_list(browser, event)
