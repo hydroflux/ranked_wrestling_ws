@@ -5,7 +5,7 @@ from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import level_values, summary_flags
+from variables.matches import level_values, summary_flags, round_flag, unknown_values
 
 
 def handle_event_level(match, match_summary):
@@ -24,9 +24,20 @@ def handle_event_level(match, match_summary):
     return match_summary
 
 
+def handle_unknown_values(match, option=None):
+    if option == 'winning summary':
+        match.winner = unknown_values[0]
+        match.winning_team = unknown_values[0]
+
+
 def handle_event_participants(match, summary):
     if summary_flags["flag_1"] in summary:
-        pass
+        winning_summary, losing_summary = summary.split(summary_flags["flag_1"])
+        if round_flag in winning_summary:
+            match.round = winning_summary[:winning_summary.index(round_flag)]
+            winning_summary = winning_summary[(len(match.round) + 3):]
+        if winning_summary in unknown_values:
+            handle_unknown_values(match, 'winning summary')
     elif summary.endswith(summary_flags["flag_2"]):
         pass
     elif summary.endswith(summary_flags["flag_3"]):
