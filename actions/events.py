@@ -48,7 +48,7 @@ def add_events(browser, team, event_list):
     add_page_events(browser, team, event_list)
     while len(event_list) < team.number_events:
         print('Encountered multiple event pages, please review, update code, & re-start.')
-        input()
+        input('Press enter to continue...')
     return event_list
 
 

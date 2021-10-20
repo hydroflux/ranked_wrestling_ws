@@ -16,8 +16,12 @@ def add_page_matches(browser, event, match_list):
     pass
 
 
-def add_matches(browser, event, event_list):
-    pass
+def add_matches(browser, event, match_list):
+    add_page_matches(browser, event, match_list)
+    while len(match_list) < event.number_matches:
+        print('Encountered multiple match pages, please review, update code, & re-start')
+        input('Press enter to continue...')
+    return match_list
 
 
 def create_match_list(browser, event):
