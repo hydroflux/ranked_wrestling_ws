@@ -173,16 +173,6 @@ def handle_event_participants(match, summary):
 def split_match_summary_information(match, match_summary):
     summary = handle_event_level(match, match_summary)
     handle_event_participants(match, summary)
-    pass
-    # "rounds": '',
-    # "winning_team": '',
-    # "winner": '',
-    # "losing_team": '',
-    # "loser": '',
-    # "results": '',
-    # "time": '',
-    # "winning_point": '',
-    # "losing_point": ''
 
 
 def build_single_match_information(match_information):
