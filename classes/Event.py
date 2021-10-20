@@ -3,7 +3,7 @@ class Event:
     total_events = 0
 
     def __init__(self, name, link, date, time, level,
-                 type, is_tournament=False,
+                 type=None, is_tournament=False,
                  number_matches=0, matches=None
         ):
         self.name = name
