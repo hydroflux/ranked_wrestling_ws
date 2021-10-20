@@ -24,9 +24,13 @@ def handle_event_level(match, match_summary):
     return match_summary
 
 
-def check_for_round_flag(match, summary):
+def check_for_round_flag(match, summary, option=None):
     if round_flag in summary:
         match.round = summary[: summary.index(round_flag)]
+        if option is not None:
+            return summary[(len(match.round) + 3):]
+    else:
+        return summary
 
 
 def handle_unknown_values(match, option=None):
@@ -128,7 +132,32 @@ def handle_event_participants(match, summary):
             result = summary[(summary.find(participant_flags['1']) + 1): -1]
             split_match_result(match, result)
     elif summary_flags['flag_5'] in summary:
-        pass
+        winning_summary = summary[:summary.find(summary_flags['flag_5'])]
+        updated_winning_summary = check_for_round_flag(match, winning_summary, option='return')
+        if updated_winning_summary in unknown_values:
+            handle_unknown_values(match, 'winning summary')
+        else:
+            match.winner = updated_winning_summary[:updated_winning_summary.find(f' {participant_flags["1"]}')]
+            if participant_flags["3"] in updated_winning_summary:
+                match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags["1"]) + 1):(updated_winning_summary.find(participant_flags["3"]) + 1)]
+            elif participant_flags["2"] in updated_winning_summary:
+                match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags["1"]) + 1):updated_winning_summary.find(participant_flags["2"])]
+            losing_summary = summary[(summary.find(summary_flags['flag_5']) + 6):]
+            if participant_flags["4"] in losing_summary:
+                end_index = losing_summary.rfind(participant_flags['4']) + 3
+            elif participant_flags["5"] in losing_summary:
+                end_index = losing_summary.rfind(participant_flags['5']) + 2
+            match.result = losing_summary[end_index: -1]
+            updated_losing_summary = losing_summary[: end_index]
+            if updated_losing_summary in unknown_values:
+                handle_unknown_values(match, 'losing summary')
+            elif participant_flags["1"] in updated_losing_summary:
+                losing_index = updated_losing_summary.rfind(participant_flags["1"])
+                if updated_losing_summary.endswith(participant_flags["2"]) or updated_losing_summary.endswith(participant_flags["6"]):
+                    losing_index = (updated_losing_summary[:losing_index]).rfind(participant_flags["1"])
+                match.loser = updated_losing_summary[: (losing_index - 1)]
+                match.losing_team = updated_losing_summary[(losing_index + 1):]
+        split_match_result(match, match.result)
     elif summary.endswith(summary_flags['flag_6']):
         pass
 
