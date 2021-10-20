@@ -44,7 +44,7 @@ class Stat:
         self.winning_point = winning_point
         self.losing_point = losing_point
 
-        Stats.number_stats += 1
+        Stat.number_stats += 1
 
     def __str__(self):
         return f'{self.league} - {self.city} => {self.match}'
