@@ -1,4 +1,5 @@
 from classes.Match import Match
+from classes.Stat import Stat
 from actions.pages import get_page_data
 from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
@@ -229,12 +230,19 @@ def report_matches(team, event):
     print_list_by_index(all_matches)
 
 
-def record_matches(season, division, league, team, event, stats):
-    pass
+def record_stat(season, division, league, team, event, match, stats):
+    stat = Stat(
+    )
+    stats.append(stat)
+
+
+def record_match_list(season, division, league, team, event, match_list, stats):
+    for match in match_list:
+        record_stat(season, division, league, team, event, match, stats)
 
 
 def record_event_matches(browser, season, division, league, team, event, stats):
     match_list = create_match_list(browser, event)
     update_event_matches(event, match_list)
     report_matches(team, event)
-    record_matches(season, division, league, team, event, stats)
+    record_match_list(season, division, league, team, event, match_list, stats)
