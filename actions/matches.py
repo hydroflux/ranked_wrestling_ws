@@ -5,28 +5,43 @@ from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import event_level_values
+from variables.matches import level_values, summary_flags
 
 
 def handle_event_level(match, match_summary):
-    if match_summary.startswith(event_level_values["level_1_tag"]):
-        match.level = event_level_values["level_1_value"]
+    if match_summary.startswith(level_values["level_1_tag"]):
+        match.level = level_values["level_1_value"]
         match_summary = match_summary[10:]
-    elif match_summary.startswith(event_level_values["level_2_tag"]):
-        match.level = event_level_values["level_2_value"]
+    elif match_summary.startswith(level_values["level_2_tag"]):
+        match.level = level_values["level_2_value"]
         match_summary = match_summary[17:]
-    elif match_summary.startswith(event_level_values["level_3_tag"]):
-        match.level = event_level_values["level_3_value"]
+    elif match_summary.startswith(level_values["level_3_tag"]):
+        match.level = level_values["level_3_value"]
         match_summary = match_summary[16:]
-    elif match_summary.startswith(event_level_values["level_4_tag"]):
-        match.level = event_level_values["level_4_value"]
+    elif match_summary.startswith(level_values["level_4_tag"]):
+        match.level = level_values["level_4_value"]
         match_summary = match_summary[12:]
     return match_summary
-    
+
+
+def handle_event_participants(match, summary):
+    if summary_flags["flag_1"] in summary:
+        pass
+    elif summary.endswith(summary_flags["flag_2"]):
+        pass
+    elif summary.endswith(summary_flags["flag_3"]):
+        pass
+    elif summary_flags["flag_4"] in summary:
+        pass
+    elif summary_flags["flag_5"] in summary:
+        pass
+    elif summary.endswith(summary_flags["flag_6"]):
+        pass
 
 
 def split_match_summary_information(match, match_summary):
-    match_summary = handle_event_level(match, match_summary)
+    summary = handle_event_level(match, match_summary)
+    handle_event_participants(match, summary)
     pass
     # "rounds": '',
     # "winning_team": '',
