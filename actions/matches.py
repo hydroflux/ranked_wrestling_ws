@@ -1,3 +1,4 @@
+from classes.Match import Match
 from actions.pages import get_page_data
 from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
@@ -6,28 +7,29 @@ from settings.printer import iterate_list, print_list_by_index
 from variables.general import row_class_name, row_data_tag
 
 
-def split_match_summary_information(match_summary):
+def split_match_summary_information(match, match_summary):
     pass
+    # "rounds": '',
+    # "winning_team": '',
+    # "winner": '',
+    # "losing_team": '',
+    # "loser": '',
+    # "results": '',
+    # "time": '',
+    # "winning_point": '',
+    # "losing_point": ''
 
 
 def build_single_match_information(match_information):
     match_summary = match_information[2].text 
-    match_information = {
-        "weight": match_information[1].text,
-        "summary": match_summary,
-        "stat_flag": match_information[3].text,
-        "tw_event": match_information[4].text,
-        "rounds": '',
-        "winning_team": '',
-        "winner": '',
-        "losing_team": '',
-        "loser": '',
-        "results": '',
-        "time": '',
-        "winning_point": '',
-        "losing_point": ''
-    }
-    return match_information
+    match = Match(
+        weight=match_information[1].text,
+        summary=match_summary,
+        stat_flag=match_information[3].text,
+        tw_event=match_information[4].text,
+    )
+    split_match_summary_information(match, match_summary)
+    return match
 
 
 def get_match_summary_information(browser):
