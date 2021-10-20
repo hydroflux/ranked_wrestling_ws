@@ -44,6 +44,11 @@ def handle_unknown_values(match, option=None):
         match.losing_team = unknown
 
 
+def handle_match_point(match):
+    if match.point != '':
+        match.winning_point, match.losing_point = match.point.split('-')
+
+
 def split_match_result(match, result):
     if result.startswith(result_options['flag_1']):
         match.result = result_options["value_1"]
@@ -89,6 +94,7 @@ def split_match_result(match, result):
         match.point = result[4:]
     else:
         match.result = result
+    handle_match_point(match)
 
 
 def handle_event_participants(match, summary):
