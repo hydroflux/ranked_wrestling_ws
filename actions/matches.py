@@ -3,17 +3,19 @@ from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
 
-def build_match_link(match_information):
+def build_match_information(match_information):
     pass
 
 
-def get_match_links(browser):
-    match_links = []
+def get_match_information(browser):
+    match_information = []
     page_data = get_page_data(browser)
 
 
 def add_page_matches(browser, event, match_list):
-    pass
+    match_information = get_match_information(browser)
+    match_list.extend(match_information)
+    print(f'Added {str(len(match_information))} events to "{event.name}" team list.')
 
 
 def add_matches(browser, event, match_list):
