@@ -9,7 +9,7 @@ class Season:
         self.title = title
 
     def __str__(self):
-        return f'{self.name} {self.year} ({self.id})'
+        return f'{self.name} ({self.id})'
 
     def season_link(self):
         return f'{season_script}("{self.id}")'
