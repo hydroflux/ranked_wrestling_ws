@@ -1,7 +1,7 @@
 import os
 from pandas import DataFrame, ExcelWriter
 
-from variables.export import start_row, title_format, header_format, border_format
+from variables.export import start_row, title_format, header_format, border_format, last_column, xlsx_columns
 
 from settings.settings import target_directory
 
@@ -39,14 +39,6 @@ def count_columns(dataframe):
     return len(dataframe.columns)
 
 
-def number_to_letter(number):
-    return chr(number + 65)
-
-
-def access_last_column(dataframe):
-    return number_to_letter(count_columns(dataframe))
-
-
 def access_last_row(dataframe):
     return len(dataframe.index) + start_row
 
@@ -57,18 +49,18 @@ def set_page_format(dataframe, worksheet):
     worksheet.set_margins(left=0.25, right=0.25, top=0.75, bottom=0.75)
     worksheet.hide_gridlines(2)
     worksheet.freeze_panes(f'A{start_row + 1}')
-    worksheet.autofilter(f'A{start_row}:{access_last_column(dataframe)}{access_last_row(dataframe) + 1}')
+    worksheet.autofilter(f'A{start_row}:{last_column}{access_last_row(dataframe) + 1}')
 
 
 def add_title_row(file_name, dataframe, worksheet):
     worksheet.set_row(0, title_format["height"])
-    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', file_name, title_format['font'])
+    worksheet.merge_range(f'A1:{last_column}1', file_name, title_format['font'])
 
 
 def add_headers(dataframe, worksheet):
     for index in range(count_columns(dataframe)):
         name = dataframe.columns[index]
-        position = number_to_letter(index + 1)
+        position = xlsx_columns[index]
         worksheet.merge_range(
             f'{position}2:{position}3',
             name,
@@ -77,7 +69,7 @@ def add_headers(dataframe, worksheet):
 
 
 def access_worksheet_range(dataframe):
-    return f'A{start_row}:{access_last_column(dataframe)}{access_last_row(dataframe)}'
+    return f'A{start_row}:{last_column}{access_last_row(dataframe)}'
 
 
 def set_border(dataframe, worksheet):
