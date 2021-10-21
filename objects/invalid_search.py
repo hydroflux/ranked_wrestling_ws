@@ -35,7 +35,7 @@ def record_invalid_event(browser, division, league, team, event, stats):
         time=event.time,
         level=event.level,
         type=event.type,
-        number_matches=event.number_matches,
+        number_matches=0,
         weight='N/A',
         summary='N/A',
         stat_flag='N/A',
