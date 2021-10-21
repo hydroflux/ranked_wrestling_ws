@@ -1,3 +1,4 @@
+from classes.Stat import Stat
 from actions.pages import get_page_data
 from selenium_utilities.locators import locate_element_by_class_name
 from variables.general import no_records_class
@@ -17,4 +18,37 @@ def record_invalid_team(browser, division, league, team, stats):
 
 
 def record_invalid_event(browser, division, league, team, event, stats):
-    pass
+    stat = Stat(
+        state=division.state,
+        division_name=division.name,
+        division_abbreviation=division.division_abbreviation,
+        number_leagues=division.number_leagues,
+        league_name=league.name,
+        league_link=league.link,
+        number_teams=league.number_teams,
+        team_name=team.name,
+        team_link=team.link,
+        team_abbreviation=team.abbreviation,
+        number_events=team.number_events,
+        event_name=event.name,
+        date=event.date,
+        time=event.time,
+        level=event.level,
+        type=event.type,
+        number_matches=event.number_matches,
+        weight='N/A',
+        summary='N/A',
+        stat_flag='N/A',
+        tw_event='N/A',
+        match_level='N/A',
+        round='N/A',
+        winning_team='N/A',
+        winner='N/A',
+        losing_team='N/A',
+        loser='N/A',
+        results='N/A',
+        match_time='N/A',
+        winning_point='N/A',
+        losing_point='N/A',
+    )
+    stats.append(stat)
