@@ -47,4 +47,4 @@ class Stat:
         Stat.number_stats += 1
 
     def __str__(self):
-        return f'{self.league} - {self.city} => {self.match}'
+        return f'{self.league_name} - {self.team_name} => {self.summary}'
