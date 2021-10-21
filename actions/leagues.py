@@ -91,17 +91,17 @@ def report_leagues(season, division):
           
 
 
-def search_league(browser, season, division, league, stats):
+def search_league(browser, division, league, stats):
     print(f'\nSearching "{league.name}" for teams...')
     browser.get(league.link)
     if check_for_results(browser):
-        record_league_teams(browser, season, division, league, stats)
+        record_league_teams(browser, division, league, stats)
     else:
         record_invalid_league(browser, division, league, stats)
 
 
-def record_leagues(browser, season, division, league_list):
-    return [search_league(browser, season, division, league, stats) for league in division.leagues]
+def record_leagues(browser, division):
+    return [search_league(browser, division, league, stats) for league in division.leagues]
 
 
 def record_division_leagues(browser, season, division):
@@ -109,4 +109,4 @@ def record_division_leagues(browser, season, division):
     league_list = create_league_list(browser, division)
     update_division_leagues(division, league_list)
     report_leagues(season, division)
-    return record_leagues(browser, season, division, league_list)
+    return record_leagues(browser, division)

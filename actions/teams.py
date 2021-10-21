@@ -98,22 +98,22 @@ def report_teams(division, league):
     print_list_by_index(all_teams)
 
 
-def search_team(browser, season, division, league, team, stats):
+def search_team(browser, division, league, team, stats):
     print(f'\nSearching "{team.name}" for events...')
     browser.get(team.link)
     if check_for_results(browser):
-        record_team_events(browser, season, division, league, team, stats)
+        record_team_events(browser, division, league, team, stats)
     else:
         record_invalid_team(browser, division, league, team, stats)
 
 
-def record_teams(browser, season, division, league, stats):
-    return [search_team(browser, season, division, league, team, stats) for team in league.teams]
+def record_teams(browser, division, league, stats):
+    return [search_team(browser, division, league, team, stats) for team in league.teams]
 
 
-def record_league_teams(browser, season, division, league, stats):
+def record_league_teams(browser, division, league, stats):
     count_teams(browser, league)
     team_list = create_team_list(browser, league)
     update_league_teams(league, team_list)
     report_teams(division, league)
-    return record_teams(browser, season, division, league, stats)
+    return record_teams(browser, division, league, stats)
