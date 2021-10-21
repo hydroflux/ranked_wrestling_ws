@@ -110,5 +110,5 @@ def record_division_leagues(browser, season, division):
     league_list = create_league_list(browser, division)
     update_division_leagues(division, league_list)
     report_leagues(season, division)
-    stats = record_leagues(browser, division, stats)
+    record_leagues(browser, division, stats)
     return stats

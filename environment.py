@@ -4,6 +4,7 @@ from actions.leagues import record_division_leagues
 from selenium_utilities.open import open_url
 
 from settings.driver import create_webdriver
+from settings.export import export_stats
 from settings.general_functions import script_execution
 from settings.settings import headless, season, state
 
@@ -21,7 +22,7 @@ def execute(headless, season, state):
     open_division(browser, season, division)
     open_division_leagues(browser, season, division)
     stats = record_division_leagues(browser, season, division)
-    dataframe = create_dataframe(stats)
+    export_stats(stats)
     print(stats)
     # export stats
     return browser, division, season, stats  # used during testing to continue working after executing function
