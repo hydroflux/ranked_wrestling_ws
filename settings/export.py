@@ -72,8 +72,12 @@ def add_headers(dataframe, worksheet):
         )
 
 
+def access_worksheet_range(dataframe):
+    return f'A{start_row}:{access_last_column(dataframe)}{access_last_row(dataframe)}'
+
+
 def set_border(dataframe, worksheet):
-    pass
+    worksheet_range = access_worksheet_range(dataframe)
 
 
 def add_content(file_name, dataframe, worksheet):
