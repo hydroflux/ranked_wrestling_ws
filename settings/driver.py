@@ -13,7 +13,7 @@ def chrome_webdriver(headless):
     options.add_argument("--disable-browser-side-navigation")  # https://stackoverflow.com/a/49123152/1689770
     options.add_argument('enable-automation')  # https://stackoverflow.com/a/43840128/1689770
     # options.add_experimental_option("excludeSwitches")
-    # options.add_argument('--disable-extensions')
+    options.add_argument('--disable-extensions')
     # options.add_argument('--kiosk-printing')
 
 
