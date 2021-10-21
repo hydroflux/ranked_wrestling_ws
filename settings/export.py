@@ -1,7 +1,7 @@
 import os
 from pandas import DataFrame, ExcelWriter
 
-from variables.export import start_row, header
+from variables.export import start_row, title, header
 
 from settings.settings import target_directory
 
@@ -53,16 +53,23 @@ def set_page_format(dataframe, worksheet):
     worksheet.set_margins(left=0.25, right=0.25, top=0.75, bottom=0.75)
     worksheet.hide_gridlines(2)
     worksheet.freeze_panes(f'A{start_row + 1}')
-    worksheet.autofilter(f'A2:{access_last_column(dataframe)}{access_last_row(dataframe) + 1}')
+    worksheet.autofilter(f'A{start_row}:{access_last_column(dataframe)}{access_last_row(dataframe) + 1}')
 
 
 def add_title_row(file_name, dataframe, worksheet):
-    worksheet.set_row(0, header["height"])
-    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', file_name, header['font'])
+    worksheet.set_row(0, title["height"])
+    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', file_name, title['font'])
 
 
 def add_headers(dataframe, worksheet):
-    pass
+    for index in range(count_columns(dataframe)):
+        name = dataframe.columns[index]
+        position = chr(ord('@') + (index + 1))
+        worksheet.merge_range(
+            f'{position}2:{position}3',
+            name,
+            title['font']
+        )
 
 
 def set_border(dataframe, worksheet):
