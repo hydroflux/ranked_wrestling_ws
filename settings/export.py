@@ -56,13 +56,9 @@ def set_page_format(dataframe, worksheet):
     worksheet.autofilter(f'A2:{access_last_column(dataframe)}{access_last_row(dataframe) + 1}')
 
 
-def set_title_row_format(dataframe, worksheet):
-    worksheet.set_row(0, header["height"])
-    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', '', header['font'])
-
-
 def add_title_row(file_name, dataframe, worksheet):
-    set_title_row_format(dataframe, worksheet)
+    worksheet.set_row(0, header["height"])
+    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', file_name, header['font'])
 
 
 def add_headers(dataframe, worksheet):
