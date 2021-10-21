@@ -39,13 +39,17 @@ def count_columns(dataframe):
     return len(dataframe.columns)
 
 
-def set_page_format(worksheet):
+def access_last_row(dataframe):
+    return len(dataframe.index) + start_row
+
+
+def set_page_format(dataframe, worksheet):
     worksheet.set_landscape()
     worksheet.set_paper(5)
     worksheet.set_margins(left=0.25, right=0.25, top=0.75, bottom=0.75)
     worksheet.hide_gridlines(2)
     worksheet.freeze_panes(f'A{start_row + 1}')
-
+    worksheet.autofilter(f'A2:{chr(ord("@") + (count_columns(dataframe)))}{access_last_row(dataframe) + 1}')
 
 
 def format_xlsx_document(workbook, worksheet):
