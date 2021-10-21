@@ -24,7 +24,7 @@ def create_excel_writer(file_name):
 
 def create_stats_object(season, division, dataframe):
     file_name = build_file_name(season, division)
-    writer = create_dataframe(file_name)
+    writer = create_excel_writer(file_name)
     dataframe.to_excel(
         writer,
         sheet_name=division.division_abbreviation,
