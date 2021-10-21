@@ -1,7 +1,6 @@
 from classes.League import League
 
 from objects.invalid_search import check_for_results, record_invalid_league
-from objects.stats import stats
 
 from selenium_utilities.locators import (locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
@@ -100,13 +99,14 @@ def search_league(browser, division, league, stats):
         record_invalid_league(browser, division, league, stats)
 
 
-def record_leagues(browser, division):
+def record_leagues(browser, division, stats):
     return [search_league(browser, division, league, stats) for league in division.leagues]
 
 
 def record_division_leagues(browser, season, division):
+    stats = []
     count_leagues(browser, division)
     league_list = create_league_list(browser, division)
     update_division_leagues(division, league_list)
     report_leagues(season, division)
-    return record_leagues(browser, division)
+    return record_leagues(browser, division, stats)
