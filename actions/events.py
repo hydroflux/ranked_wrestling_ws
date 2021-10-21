@@ -75,7 +75,7 @@ def report_events(league, team):
     event_names = [event.name for event in team.events]
     all_events = iterate_list(event_names)
     print(f'{str(team.number_events)} events found for the '
-          f'{team.name} {league.name} league:')
+          f'"{team.name}" team in the "{league.name}" league:')
     print_list_by_index(all_events)
     
 

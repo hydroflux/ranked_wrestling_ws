@@ -94,7 +94,7 @@ def report_teams(division, league):
     team_names = [team.name for team in league.teams]
     all_teams = iterate_list(team_names)
     print(f'{str(league.number_teams)} teams found for the '
-          f'{league.name} league {division.name} division:')
+          f'"{league.name}" league for the "{division.name}" division:')
     print_list_by_index(all_teams)
 
 

@@ -226,7 +226,7 @@ def report_matches(team, event):
     match_summaries = [match.summary for match in event.matches]
     all_matches = iterate_list(match_summaries)
     print(f'{str(event.number_matches)} matches found for the '
-          f'"{event.name}" for "{team.name}":')
+          f'"{event.name}" event for the "{team.name}" team:')
     print_list_by_index(all_matches)
 
 
@@ -270,7 +270,6 @@ def record_stat(division, league, team, event, match, stats):
 def record_match_list(division, league, team, event, match_list, stats):
     for match in match_list:
         record_stat(division, league, team, event, match, stats)
-    return stats
 
 
 def record_event_matches(browser, division, league, team, event, stats):
