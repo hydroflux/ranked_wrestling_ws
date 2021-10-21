@@ -4,7 +4,7 @@ class Match:
 
     def __init__(self, weight, summary, stat_flag, tw_event, level='',
                  round='', winning_team='', winner='',
-                 losing_team='', loser='', results='', time='',
+                 losing_team='', loser='', result='', time='',
                  point=None, winning_point='', losing_point=''
     ):
         self.weight = weight
@@ -17,7 +17,7 @@ class Match:
         self.winner = winner,
         self.losing_team = losing_team,
         self.loser = loser,
-        self.results = results,
+        self.result = result,
         self.time = time,
         self.point = point
         self.winning_point = winning_point,

@@ -259,7 +259,7 @@ def record_stat(division, league, team, event, match, stats):
         winner=match.winner,
         losing_team=match.losing_team,
         loser=match.loser,
-        results=match.results,
+        result=match.result,
         match_time=match.time,
         winning_point=match.winning_point,
         losing_point=match.losing_point,

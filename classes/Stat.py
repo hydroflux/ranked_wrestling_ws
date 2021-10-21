@@ -10,7 +10,7 @@ class Stat:
         event_name, date, time, level, type, number_matches,
         weight, summary, stat_flag, tw_event, match_level, round,
         winning_team, winner, losing_team, loser,
-        results, match_time, winning_point, losing_point
+        result, match_time, winning_point, losing_point
     ):
         self.state = state
         self.division_name = division_name
@@ -39,7 +39,7 @@ class Stat:
         self.winner = winner
         self.losing_team = losing_team
         self.loser = loser
-        self.results = results
+        self.result = result
         self.match_time = match_time
         self.winning_point = winning_point
         self.losing_point = losing_point
