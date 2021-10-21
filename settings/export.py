@@ -39,8 +39,12 @@ def count_columns(dataframe):
     return len(dataframe.columns)
 
 
+def number_to_letter(number):
+    return chr(number + 65)
+
+
 def access_last_column(dataframe):
-    return chr(ord("@") + (count_columns(dataframe)))
+    return number_to_letter(count_columns(dataframe))
 
 
 def access_last_row(dataframe):
@@ -64,7 +68,7 @@ def add_title_row(file_name, dataframe, worksheet):
 def add_headers(dataframe, worksheet):
     for index in range(count_columns(dataframe)):
         name = dataframe.columns[index]
-        position = chr(ord('@') + (index + 1))
+        position = number_to_letter(index + 1)
         worksheet.merge_range(
             f'{position}2:{position}3',
             name,
