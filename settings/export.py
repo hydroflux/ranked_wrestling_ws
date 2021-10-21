@@ -1,7 +1,7 @@
 import os
 from pandas import DataFrame, ExcelWriter
 
-from variables.export import start_row
+from variables.export import start_row, header
 
 from settings.settings import target_directory
 
@@ -32,11 +32,15 @@ def create_stats_object(season, division, dataframe):
         header=False,
         index=False
     )
-    return writer
+    return writer, file_name
 
 
 def count_columns(dataframe):
     return len(dataframe.columns)
+
+
+def access_last_column(dataframe):
+    return chr(ord("@") + (count_columns(dataframe)))
 
 
 def access_last_row(dataframe):
@@ -49,11 +53,16 @@ def set_page_format(dataframe, worksheet):
     worksheet.set_margins(left=0.25, right=0.25, top=0.75, bottom=0.75)
     worksheet.hide_gridlines(2)
     worksheet.freeze_panes(f'A{start_row + 1}')
-    worksheet.autofilter(f'A2:{chr(ord("@") + (count_columns(dataframe)))}{access_last_row(dataframe) + 1}')
+    worksheet.autofilter(f'A2:{access_last_column(dataframe)}{access_last_row(dataframe) + 1}')
 
 
-def add_title_row(dataframe, worksheet):
-    pass
+def set_title_row_format(dataframe, worksheet):
+    worksheet.set_row(0, header["height"])
+    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', '', header['font'])
+
+
+def add_title_row(file_name, dataframe, worksheet):
+    set_title_row_format(dataframe, worksheet)
 
 
 def add_headers(dataframe, worksheet):
@@ -64,20 +73,20 @@ def set_border(dataframe, worksheet):
     pass
 
 
-def add_content(dataframe, worksheet):
-    add_title_row(dataframe, worksheet)
+def add_content(file_name, dataframe, worksheet):
+    add_title_row(file_name, dataframe, worksheet)
     add_headers(dataframe, worksheet)
     set_border(dataframe, worksheet)
 
 
-def create_xlsx_document(division, writer, dataframe):
+def create_xlsx_document(division, writer, file_name, dataframe):
     worksheet = writer.sheets[division.division_abbreviation]
     set_page_format(dataframe, worksheet)
-    add_content()
+    add_content(file_name, dataframe, worksheet)
 
 
 def export_stats(season, division, stats):
     os.chdir(target_directory)
     dataframe = create_dataframe(stats)
-    writer = create_stats_object(season, division, dataframe)
-    create_xlsx_document(division, writer, dataframe)
+    writer, file_name = create_stats_object(season, division, dataframe)
+    create_xlsx_document(division, writer, file_name, dataframe)
