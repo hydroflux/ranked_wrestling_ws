@@ -1,7 +1,7 @@
 import os
 from pandas import DataFrame, ExcelWriter
 
-from variables.export import start_row, title_format, header_format, border, border_format, last_column, xlsx_columns
+from variables.export import start_row, title_format, header_format, border_format, last_column, xlsx_columns
 
 from settings.settings import target_directory
 
@@ -47,8 +47,7 @@ def set_font_formats(workbook):
     return {
         'title': workbook.add_format(title_format['font']),
         'header': workbook.add_format(header_format['font']),
-        'border_1': workbook.add_format(border_format['1']),
-        'border_2': workbook.add_format(title_format['2'])
+        'border': workbook.add_format(border_format['border']),
     }
 
 
@@ -83,8 +82,10 @@ def access_worksheet_range(dataframe):
 
 def set_border(dataframe, worksheet, font_formats):
     worksheet_range = access_worksheet_range(dataframe)
-    worksheet.conditional_format(worksheet_range, font_formats['border_1'])
-    worksheet.conditional_format(worksheet_range, font_formats['border_2'])
+    border_format['1']['format'] = font_formats['border']
+    border_format['2']['format'] = font_formats['border']
+    worksheet.conditional_format(worksheet_range, border_format['1'])
+    worksheet.conditional_format(worksheet_range, border_format['2'])
 
 
 def add_content(file_name, dataframe, worksheet, font_formats):
