@@ -162,11 +162,11 @@ def handle_event_participants(match, summary):
     elif summary.endswith(summary_flags['flag_6']):
         winning_summary = summary[:summary.find(summary_flags['flag_6'])]
         updated_winning_summary = check_for_round_flag(match, winning_summary, option='return')
-        match.winner = winning_summary[:winning_summary.find(participant_flags['5'])]
-        if participant_flags['3'] in winning_summary:
-            match.winning_team = winning_summary[(winning_summary.find(participant_flags['1']) + 1): winning_summary.find(participant_flags['3'])]
-        elif participant_flags['2'] in winning_summary:
-            match.winning_team = winning_summary[(winning_summary.find(participant_flags['1']) + 1): winning_summary.find(participant_flags['2'])]
+        match.winner = updated_winning_summary[:updated_winning_summary.find(participant_flags['5'])]
+        if participant_flags['3'] in updated_winning_summary:
+            match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags['1']) + 1): updated_winning_summary.find(participant_flags['3'])]
+        elif participant_flags['2'] in updated_winning_summary:
+            match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags['1']) + 1): updated_winning_summary.find(participant_flags['2'])]
         handle_unknown_values(match, 'losing summary')
         match.result = result_options["value_16"]
 
