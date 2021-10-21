@@ -1,7 +1,7 @@
 import os
 from pandas import DataFrame, ExcelWriter
 
-from variables.export import start_row, title, header
+from variables.export import start_row, title_format, header_format, border_format
 
 from settings.settings import target_directory
 
@@ -57,8 +57,8 @@ def set_page_format(dataframe, worksheet):
 
 
 def add_title_row(file_name, dataframe, worksheet):
-    worksheet.set_row(0, title["height"])
-    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', file_name, title['font'])
+    worksheet.set_row(0, title_format["height"])
+    worksheet.merge_range(f'A1:{access_last_column(dataframe)}1', file_name, title_format['font'])
 
 
 def add_headers(dataframe, worksheet):
@@ -68,7 +68,7 @@ def add_headers(dataframe, worksheet):
         worksheet.merge_range(
             f'{position}2:{position}3',
             name,
-            title['font']
+            header_format['font']
         )
 
 
@@ -78,6 +78,8 @@ def access_worksheet_range(dataframe):
 
 def set_border(dataframe, worksheet):
     worksheet_range = access_worksheet_range(dataframe)
+    worksheet.conditional_format(worksheet_range, border_format['1'])
+    worksheet.conditional_format(worksheet_range, border_format['2'])
 
 
 def add_content(file_name, dataframe, worksheet):
