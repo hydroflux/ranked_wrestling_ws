@@ -100,7 +100,6 @@ def handle_event_type(browser, division, league, team, event, stats):
 def search_event(browser, division, league, team, event, stats):
     print(f'\nSearching "{event.name}" for matches...')
     open_event(browser, event)
-    handle_event_type(browser, division, league, team, event, stats)
     if check_for_results(browser):
         handle_event_type(browser, division, league, team, event, stats)
     else:
