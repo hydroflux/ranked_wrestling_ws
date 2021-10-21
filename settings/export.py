@@ -7,7 +7,7 @@ from settings.settings import target_directory
 
 
 def build_file_name(season, division):
-    return f'{division}{season.year}'
+    return f'{division} ({season.year}).xlsx'
 
 
 def create_dataframe(stats):
@@ -62,7 +62,7 @@ def set_page_format(dataframe, worksheet):
 
 def add_title_row(file_name, worksheet, font_formats):
     worksheet.set_row(0, title_format["height"])
-    worksheet.merge_range(f'A1:{last_column}1', file_name, font_formats['title'])
+    worksheet.merge_range(f'A1:{last_column}1', file_name[:-5], font_formats['title'])
 
 
 def add_headers(dataframe, worksheet, font_formats):
