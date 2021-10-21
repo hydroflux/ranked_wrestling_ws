@@ -33,11 +33,21 @@ def create_stats_object(season, division, dataframe):
     return writer
 
 
-def create_xlsx_document(target_directory, file_name, dataframe):
+def set_page_format(worksheet):
     pass
+
+
+def format_xlsx_document(workbook, worksheet):
+    pass
+
+
+def create_xlsx_document(division, writer, dataframe):
+    workbook = writer.book
+    worksheet = writer.sheets[division.division_abbreviation]
 
 
 def export_stats(season, division, stats):
     os.chdir(target_directory)
     dataframe = create_dataframe(stats)
     writer = create_stats_object(season, division, dataframe)
+    create_xlsx_document(division, writer, dataframe)
