@@ -52,13 +52,28 @@ def set_page_format(dataframe, worksheet):
     worksheet.autofilter(f'A2:{chr(ord("@") + (count_columns(dataframe)))}{access_last_row(dataframe) + 1}')
 
 
-def format_xlsx_document(workbook, worksheet):
+def add_title_row(dataframe, worksheet):
     pass
 
 
+def add_headers(dataframe, worksheet):
+    pass
+
+
+def set_border(dataframe, worksheet):
+    pass
+
+
+def add_content(dataframe, worksheet):
+    add_title_row(dataframe, worksheet)
+    add_headers(dataframe, worksheet)
+    set_border(dataframe, worksheet)
+
+
 def create_xlsx_document(division, writer, dataframe):
-    workbook = writer.book
     worksheet = writer.sheets[division.division_abbreviation]
+    set_page_format(dataframe, worksheet)
+    add_content()
 
 
 def export_stats(season, division, stats):
