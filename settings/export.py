@@ -94,8 +94,13 @@ def create_xlsx_document(division, writer, file_name, dataframe):
     add_content(file_name, dataframe, worksheet)
 
 
+def close_workbook(writer):
+    writer.book.close()
+
+
 def export_stats(season, division, stats):
     os.chdir(target_directory)
     dataframe = create_dataframe(stats)
     writer, file_name = create_stats_object(season, division, dataframe)
     create_xlsx_document(division, writer, file_name, dataframe)
+    close_workbook(writer)
