@@ -23,9 +23,7 @@ def execute(headless, season, state):
     open_division_leagues(browser, season, division)
     stats = record_division_leagues(browser, season, division)
     export_stats(season, division, stats)
-    print(stats)
-    # export stats
-    return browser, division, season, stats  # used during testing to continue working after executing function
+    return browser, division, season, stats
 
 
 browser, division, season, stats = execute(headless, season, state)
