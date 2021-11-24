@@ -100,8 +100,8 @@ def search_league(browser, division, league, stats):
 
 
 def record_leagues(browser, division, stats):
-    return [search_league(browser, division, league, stats) for league in division.leagues]
-    # return [search_league(browser, division, league, stats) for league in division.leagues[-1:]]  # testing
+    # return [search_league(browser, division, league, stats) for league in division.leagues]
+    return [search_league(browser, division, league, stats) for league in division.leagues[-1:]]  # testing
 
 
 def record_division_leagues(browser, season, division):
