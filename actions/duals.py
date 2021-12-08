@@ -4,6 +4,7 @@ from classes.Stat import Stat
 
 from selenium_utilities.locators import (locate_element_by_tag_name, locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
+from settings.printer import iterate_list, print_list_by_index
 
 from variables.duals import official_tag, teams_tag, score_tag
 from variables.general import row_class_name, row_data_tag
@@ -74,12 +75,19 @@ def create_dual_match_list(browser, event):
     return add_dual_matches(browser, event, match_list)
 
 
-def update_team_events():  # ?????
-    pass
+# nearly identical to 'update_event_matches' in the 'matches' script
+def update_event_dual_matches(event, dual_match_list):
+    event.matches = dual_match_list
+    event.number_matches = len(dual_match_list)
 
 
-def report_duals():
-    pass
+# nearly identical to 'report_matches' in the 'matches' script
+def report_duals(team, event):
+    dual_match_summaries = [dual_match.summary for dual_match in event.matches]
+    all_dual_matches = iterate_list(dual_match_summaries)
+    print(f'{str(event.number_matches)} dual matches found for the '
+        f'"{event.name}" event for the "{team.name}" team:')
+    print_list_by_index(all_dual_matches)
 
 
 def open_event():
@@ -95,5 +103,4 @@ def record_duals():
 
 
 def record_event_duals(browser, division, league, team, event, stats):
-    pass
-    # match_list = create_dual_match_list(browser, event)
+    dual_match_list = create_dual_match_list(browser, event)
