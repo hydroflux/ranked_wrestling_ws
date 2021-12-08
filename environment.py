@@ -27,3 +27,4 @@ def execute(headless, season, state):
 
 
 # browser, division, season, stats = execute(headless, season, state)
+execute(headless, season, state)

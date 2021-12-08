@@ -99,7 +99,7 @@ def record_stat(division, league, team, event, match, stats):
         # Tournament
         is_tournament=event.is_tournament,
         tournament_winner=event.tournament_winner,
-        tournament_loser=event.tournament_runner_up,
+        tournament_runner_up=event.tournament_runner_up,
         # Dual Event Exclusive
         official=event.official,
         comment=event.comment,
