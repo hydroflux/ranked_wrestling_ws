@@ -3,7 +3,6 @@ from classes.Match import Match
 from classes.Stat import Stat
 from actions.pages import get_page_data
 from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
-from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
