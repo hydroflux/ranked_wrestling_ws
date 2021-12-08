@@ -1,6 +1,11 @@
-from actions.summary_breakdown import handle_blank_participants, handle_double_disqualification, handle_double_forfeit, handle_match_bye, handle_vs_match, split_match_result, split_runner_up_information, split_winner_information
-
 from variables.matches import unknown_values
+
+from actions.summary_breakdown import (handle_blank_participants,
+                                       handle_double_disqualification,
+                                       handle_double_forfeit, handle_match_bye,
+                                       handle_vs_match, split_match_result,
+                                       split_runner_up_information,
+                                       split_winner_information)
 
 
 def handle_standard_match(match, summary):
@@ -10,7 +15,7 @@ def handle_standard_match(match, summary):
     split_match_result(match)
 
 
-def handle_event_participants(match, summary):
+def handle_match_types(match, summary):
     if ' vs. ' in summary:
         handle_vs_match(match, summary)
     elif summary.endswith('Double Forfeit'):
