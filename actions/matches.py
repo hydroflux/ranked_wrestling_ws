@@ -1,11 +1,18 @@
-from actions.summary_breakdown import handle_blank_participants, handle_double_disqualification, handle_double_forfeit, handle_event_level, handle_event_participants, handle_match_bye, handle_standard_match, handle_vs_match
 from classes.Match import Match
 from classes.Stat import Stat
-from actions.pages import get_page_data
-from selenium_utilities.locators import locate_elements_by_class_name, locate_elements_by_tag_name
+
+from selenium_utilities.locators import (locate_elements_by_class_name,
+                                         locate_elements_by_tag_name)
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
+
+from actions.pages import get_page_data
+from actions.summary_breakdown import (handle_blank_participants,
+                                       handle_double_disqualification,
+                                       handle_double_forfeit,
+                                       handle_event_level, handle_match_bye,
+                                       handle_standard_match, handle_vs_match)
 
 
 def handle_event_participants(match, summary):
