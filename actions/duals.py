@@ -23,38 +23,39 @@ def build_dual_match_information(match_information):
     return match
 
 
-def breakdown_dual_match_information(match, match_rows):
-    while locate_element_by_tag_name(match_rows[-1], row_data_tag, "last row data").text != '':
+def breakdown_dual_match_information(event, match_rows):
+    while locate_element_by_tag_name(match_rows[-1], row_data_tag, 'dual event last row data').text != '':
         row_text = match_rows[-1].text
         if row_text.startswith(official_tag):
-            match.official = row_text[10:]
+            event.official = row_text[10:]
         elif row_text.startswith(teams_tag):
             _, team_one, team_two = row_text.splitlines()
-            match.team_one = team_one.strip()
-            match.team_two = team_two.strip()
+            event.team_one = team_one.strip()
+            event.team_two = team_two.strip()
         elif row_text.startswith(score_tag):
-            match.team_one_score = event_results[-1][1]
-            match.team_two_score = event_results[-1][2]
+            _, team_one_score, team_two_score = row_text.splitlines()
+            event.team_one_score = team_one_score.strip()
+            event.team_two_score = team_two_score.strip()
         else:
-            match.comment = event_results[-1]
-            print(event_results[-1])
-        event_results = event_results[:-1]
+            event.comment = row_text.strip()
+            print('Event Comment:', row_text[-1])
         match_rows.pop()
+    return match_rows
 
 
-def get_dual_summary_information(browser):
+def get_dual_summary_information(browser, event):
     dual_summary_information = []
     page_data = get_page_data(browser, False)
     match_rows = locate_elements_by_class_name(page_data, row_class_name, 'dual match rows')
-    updated_match_rows = breakdown_dual_match_information(match, match_rows)
-    for row in match_rows:
+    updated_match_rows = breakdown_dual_match_information(event, match_rows)
+    for row in updated_match_rows:
         match_information = locate_elements_by_tag_name(row, row_data_tag, 'dual match information')
         dual_summary_information.append(build_dual_match_information(match_information))
     return dual_summary_information
 
 
 def add_page_dual_matches(browser, event, match_list):
-    dual_summary_information = get_dual_summary_information(browser)
+    dual_summary_information = get_dual_summary_information(browser, event)
     match_list.extend(dual_summary_information)
     print(f'Added {str(len(dual_summary_information))} dual matches to "{event.name}" event list.')
 
@@ -63,7 +64,7 @@ def add_page_dual_matches(browser, event, match_list):
 def add_dual_matches(browser, event, match_list):
     add_page_dual_matches(browser, event, match_list)
     while len(match_list) < event.number_matches:  # Currently irrelevant, need to update in order to capture number_matches
-        print('Encountered multiple match pages, please review, update code, & re-start')
+        print('Encountered multiple dual match pages, please review, update code, & re-start')
         input('Press enter to continue...')
     return match_list
 
