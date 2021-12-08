@@ -48,7 +48,7 @@ def add_page_matches(browser, event, match_list):
 
 def add_matches(browser, event, match_list):
     add_page_matches(browser, event, match_list)
-    while len(match_list) < event.number_matches:
+    while len(match_list) < event.number_matches:  # Currently irrelevant, need to update in order to capture number_matches
         print('Encountered multiple match pages, please review, update code, & re-start')
         input('Press enter to continue...')
     return match_list
@@ -115,6 +115,7 @@ def record_match_list(division, league, team, event, match_list, stats):
 
 
 def record_event_matches(browser, division, league, team, event, stats):
+    print('number_matches 1', event.number_matches)
     match_list = create_match_list(browser, event)
     update_event_matches(event, match_list)
     report_matches(team, event)
