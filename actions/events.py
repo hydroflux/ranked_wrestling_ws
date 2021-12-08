@@ -1,4 +1,5 @@
 from actions.duals import record_event_duals
+from actions.tournaments import record_tournament
 from classes.Event import Event
 
 from objects.invalid_search import check_for_results, record_invalid_event
@@ -92,8 +93,7 @@ def handle_event_type(browser, division, league, team, event, stats):
     elif event.type == event_types['dual_event']:
         record_event_duals(browser, division, league, team, event, stats)
     elif event.type == event_types['tournament']:
-        # record_tournament()
-        pass
+        record_tournament(browser, division, league, team, event, stats)
     else:
         print(f'Browser encountered an unknown event type of "{event.type}", please review...')
         input()
