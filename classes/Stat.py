@@ -11,6 +11,8 @@ class Stat:
         weight, summary,
         # Single Match Exclusive
         stat_flag, tw_event,
+        # Tournament
+        is_tournament, tournament_winner, tournament_runner_up,
         # Dual Event Exclusive
         official, comment, team_one, team_two,
         team_one_score, team_two_score,
@@ -43,6 +45,10 @@ class Stat:
         # Single Match Exclusive
         self.stat_flag = stat_flag
         self.tw_event = tw_event
+        # Tournament
+        self.is_tournament = is_tournament
+        self.tournament_winner = tournament_winner
+        self.tournament_loser = tournament_runner_up
         # Dual Event Exclusive
         self.official = official
         self.comment = comment

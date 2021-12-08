@@ -23,6 +23,22 @@ def build_dual_match_information(match_information):
     return match
 
 
+def determine_dual_results(event):
+    if int(event.team_one_score) > int(event.team_two_score):
+        event.tournament_winner = event.team_one
+        event.tournament_runner_up = event.team_two
+    elif int(event.team_one_score) < int(event.team_two_score):
+        event.tournament_winner = event.team_two
+        event.tournament_runner_up = event.team_one
+    elif int(event.team_one_score) == int(event.team_two_score):
+        event.tournament_winner = 'Tie'
+        event.tournament_runner_up = 'Tie'
+    else:
+        print(f'Unexpected tournament results for '
+              f'"{print(event)}", please review & then press enter...')
+        input()
+    
+
 def breakdown_dual_match_information(event, match_rows):
     while locate_element_by_tag_name(match_rows[-1], row_data_tag, 'dual event last row data').text != '':
         row_text = match_rows[-1].text
@@ -36,6 +52,7 @@ def breakdown_dual_match_information(event, match_rows):
             _, team_one_score, team_two_score = row_text.splitlines()
             event.team_one_score = team_one_score.strip()
             event.team_two_score = team_two_score.strip()
+            determine_dual_results(event)
         else:
             event.comment = row_text.strip()
             print('Event Comment:', row_text[-1])
@@ -89,6 +106,7 @@ def record_duals_match_list(division, league, team, event, dual_match_list, stat
 
 
 def record_event_duals(browser, division, league, team, event, stats):
+    event.is_tournamnet = True
     dual_match_list = create_dual_match_list(browser, event)
     update_event_matches(event, dual_match_list)
     report_duals(team, event)

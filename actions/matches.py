@@ -96,6 +96,10 @@ def record_stat(division, league, team, event, match, stats):
         # Single Match Exclusive
         stat_flag=match.stat_flag,
         tw_event=match.tw_event,
+        # Tournament
+        is_tournament=event.is_tournament,
+        tournament_winner=event.tournament_winner,
+        tournament_loser=event.tournament_runner_up,
         # Dual Event Exclusive
         official=event.official,
         comment=event.comment,
