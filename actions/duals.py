@@ -1,6 +1,5 @@
-from actions.matches import split_match_summary_information
+from actions.matches import record_stat, split_match_summary_information, update_event_matches
 from classes.Match import Match
-from classes.Stat import Stat
 
 from selenium_utilities.locators import (locate_element_by_tag_name, locate_elements_by_class_name,
                                          locate_elements_by_tag_name)
@@ -75,12 +74,6 @@ def create_dual_match_list(browser, event):
     return add_dual_matches(browser, event, match_list)
 
 
-# nearly identical to 'update_event_matches' in the 'matches' script
-def update_event_dual_matches(event, dual_match_list):
-    event.matches = dual_match_list
-    event.number_matches = len(dual_match_list)
-
-
 # nearly identical to 'report_matches' in the 'matches' script
 def report_duals(team, event):
     dual_match_summaries = [dual_match.summary for dual_match in event.matches]
@@ -90,17 +83,14 @@ def report_duals(team, event):
     print_list_by_index(all_dual_matches)
 
 
-def open_event():
-    pass
-
-
-def search_event():
-    pass
-
-
-def record_duals():
-    pass
+def record_duals_match_list(division, league, team, event, dual_match_list, stats):
+    for match in dual_match_list:
+        record_stat(division, league, team, event, match, stats)
 
 
 def record_event_duals(browser, division, league, team, event, stats):
     dual_match_list = create_dual_match_list(browser, event)
+    update_event_matches(event, dual_match_list)
+    report_duals(team, event)
+    return record_duals_match_list(division, league, team, event, dual_match_list, stats)
+    
