@@ -7,43 +7,15 @@ from selenium_utilities.locators import (locate_elements_by_class_name,
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import unknown_values
 
+from actions.match_types import handle_match_types
 from actions.pages import get_page_data
-from actions.summary_breakdown import (handle_blank_participants,
-                                       handle_double_disqualification,
-                                       handle_double_forfeit,
-                                       handle_event_level, handle_match_bye,
-                                       handle_vs_match, split_match_result,
-                                       split_runner_up_information,
-                                       split_winner_information)
-
-
-def handle_standard_match(match, summary):
-    split_winner_information(match, summary)
-    if match.winner not in unknown_values:
-        split_runner_up_information(match, summary)
-    split_match_result(match)
-
-
-def handle_event_participants(match, summary):
-    if ' vs. ' in summary:
-        handle_vs_match(match, summary)
-    elif summary.endswith('Double Forfeit'):
-        handle_double_forfeit(match, summary)
-    elif summary.endswith('Double Disqualification'):
-        handle_double_disqualification(match, summary)
-    elif '[winner] over [loser]' in summary:
-        handle_blank_participants(match, summary)
-    elif ' over ' in summary:
-        handle_standard_match(match, summary)
-    elif summary.endswith(' received a bye'):
-        handle_match_bye(match, summary)
+from actions.summary_breakdown import handle_event_level
 
 
 def split_match_summary_information(match, match_summary):
     summary = handle_event_level(match, match_summary)
-    handle_event_participants(match, summary)
+    handle_match_types(match, summary)
 
 
 def build_single_match_information(match_information):
