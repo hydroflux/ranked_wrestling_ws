@@ -91,7 +91,6 @@ def handle_event_type(browser, division, league, team, event, stats):
         record_event_matches(browser, division, league, team, event, stats)
     elif event.type == event_types['dual_event']:
         record_event_duals(browser, division, league, team, event, stats)
-        pass
     elif event.type == event_types['tournament']:
         # record_tournament()
         pass
