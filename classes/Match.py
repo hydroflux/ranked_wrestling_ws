@@ -14,13 +14,13 @@ class Match:
         self.level = level
         self.round = round
         self.winning_team = winning_team
-        self.winner = winner,
-        self.losing_team = losing_team,
-        self.loser = loser,
-        self.result = result,
-        self.time = time,
+        self.winner = winner
+        self.losing_team = losing_team
+        self.loser = loser
+        self.result = result
+        self.time = time
         self.point = point
-        self.winning_point = winning_point,
+        self.winning_point = winning_point
         self.losing_point = losing_point
 
         Match.total_matches += 1
