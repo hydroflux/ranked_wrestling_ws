@@ -1,4 +1,4 @@
-from actions.summary_breakdown import determine_match_results, handle_event_level
+from actions.summary_breakdown import determine_match_results, handle_event_level, handle_event_participants
 from classes.Match import Match
 from classes.Stat import Stat
 from actions.pages import get_page_data
@@ -6,7 +6,7 @@ from selenium_utilities.locators import locate_elements_by_class_name, locate_el
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import summary_flags, round_flag, unknown_values, participant_flags
+from variables.matches import round_flag, unknown_values
 
 
 def check_for_round_flag(match, summary, option=None):
@@ -35,81 +35,13 @@ def handle_unknown_values(match, option=None):
 
 def handle_match_point(match):
     if match.point is not None:
+        print(match.point)
         match.winning_point, match.losing_point = match.point.split('-')
 
 
 def split_match_result(match, result):
     determine_match_results(match, result)
     handle_match_point(match)
-
-
-def handle_event_participants(match, summary):
-    if summary_flags['flag_1'] in summary:
-        winning_summary, losing_summary = summary.split(summary_flags['flag_1'])
-        if round_flag in winning_summary:
-            match.round = winning_summary[:winning_summary.index(round_flag)]
-            winning_summary = winning_summary[(len(match.round) + 3):]
-        if winning_summary in unknown_values:
-            handle_unknown_values(match, 'winning summary')
-        else:
-            match.winner = winning_summary[:(winning_summary.find(participant_flags['1']) - 1)]
-            match.winning_team = winning_summary[(winning_summary.find(participant_flags['1']) + 1): -1]
-        if losing_summary in unknown_values:
-            handle_unknown_values(match, 'losing summary')
-        else:
-            match.loser = losing_summary[:(losing_summary.find(participant_flags['1']) - 1)]
-            match.losing_team = losing_summary[(losing_summary.find(participant_flags['1']) + 1): -1]
-    elif summary.endswith(summary_flags['flag_2']):
-        check_for_round_flag(match, summary)
-        handle_unknown_values(match)
-        match.result = summary_flags['flag_2']
-    elif summary.endswith(summary_flags['flag_3']):
-        check_for_round_flag(match, summary)
-        handle_unknown_values(match)
-        match.result = summary_flags['flag_3']
-    elif summary_flags['flag_4'] in summary:
-        check_for_round_flag(match, summary)
-        handle_unknown_values(match)
-        if participant_flags['1'] in summary:
-            result = summary[(summary.find(participant_flags['1']) + 1): -1]
-            split_match_result(match, result)
-    elif summary_flags['flag_5'] in summary:
-        winning_summary = summary[:summary.find(summary_flags['flag_5'])]
-        updated_winning_summary = check_for_round_flag(match, winning_summary, option='return')
-        if updated_winning_summary in unknown_values:
-            handle_unknown_values(match, 'winning summary')
-        else:
-            match.winner = updated_winning_summary[:updated_winning_summary.find(f' {participant_flags["1"]}')]
-            if participant_flags["3"] in updated_winning_summary:
-                match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags["1"]) + 1):(updated_winning_summary.find(participant_flags["3"]) + 1)]
-            elif participant_flags["2"] in updated_winning_summary:
-                match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags["1"]) + 1):updated_winning_summary.find(participant_flags["2"])]
-            losing_summary = summary[(summary.find(summary_flags['flag_5']) + 6):]
-            if participant_flags["4"] in losing_summary:
-                end_index = losing_summary.rfind(participant_flags['4']) + 3
-            elif participant_flags["5"] in losing_summary:
-                end_index = losing_summary.rfind(participant_flags['5']) + 2
-            match.result = losing_summary[end_index: -1]
-            updated_losing_summary = losing_summary[: end_index]
-            if updated_losing_summary in unknown_values:
-                handle_unknown_values(match, 'losing summary')
-            elif participant_flags["1"] in updated_losing_summary:
-                losing_index = updated_losing_summary.rfind(participant_flags["1"])
-                if updated_losing_summary.endswith(participant_flags["2"]) or updated_losing_summary.endswith(participant_flags["6"]):
-                    losing_index = (updated_losing_summary[:losing_index]).rfind(participant_flags["1"])
-                match.loser = updated_losing_summary[: (losing_index - 1)]
-                match.losing_team = updated_losing_summary[(losing_index + 1):]
-        split_match_result(match, match.result)
-    elif summary.endswith(summary_flags['flag_6']):
-        winning_summary = summary[:summary.find(summary_flags['flag_6'])]
-        updated_winning_summary = check_for_round_flag(match, winning_summary, option='return')
-        match.winner = updated_winning_summary[:updated_winning_summary.find(participant_flags['5'])]
-        if participant_flags['3'] in updated_winning_summary:
-            match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags['1']) + 1): updated_winning_summary.find(participant_flags['3'])]
-        elif participant_flags['2'] in updated_winning_summary:
-            match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags['1']) + 1): updated_winning_summary.find(participant_flags['2'])]
-        handle_unknown_values(match, 'losing summary')
-        match.result = 'Bye'  # is this the appropriate place for this assignment?
 
 
 def split_match_summary_information(match, match_summary):
