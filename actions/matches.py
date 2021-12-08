@@ -93,8 +93,20 @@ def record_stat(division, league, team, event, match, stats):
         number_matches=event.number_matches,
         weight=match.weight,
         summary=match.summary,
+        # Single Match Exclusive
         stat_flag=match.stat_flag,
         tw_event=match.tw_event,
+        # Dual Event Exclusive
+        official=event.official,
+        comment=event.comment,
+        team_one=event.team_one,
+        team_one_score=event.team_one_score,
+        team_two=event.team_two,
+        team_two_score=event.team_two_score,
+        # Dual Match Exclusive
+        team_one_point=match.team_one_point,
+        team_two_point=match.team_two_point,
+        # Match Summary Breakdown
         match_level=match.level,
         round=match.round,
         winning_team= match.winning_team,
@@ -104,7 +116,7 @@ def record_stat(division, league, team, event, match, stats):
         result=match.result,
         match_time=match.time,
         winning_point=match.winning_point,
-        losing_point=match.losing_point,
+        losing_point=match.losing_point
     )
     stats.append(stat)
 

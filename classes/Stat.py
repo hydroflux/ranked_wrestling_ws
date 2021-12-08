@@ -8,7 +8,16 @@ class Stat:
         league_name, league_link, number_teams,
         team_name, team_link, team_abbreviation, number_events,
         event_name, date, time, level, type, number_matches,
-        weight, summary, stat_flag, tw_event, match_level, round,
+        weight, summary,
+        # Single Match Exclusive
+        stat_flag, tw_event,
+        # Dual Event Exclusive
+        official, comment, team_one, team_two,
+        team_one_score, team_two_score,
+        # Dual Match Exclusive
+        team_one_point, team_two_point,
+        # Match Summary Breakdown
+        match_level, round,
         winning_team, winner, losing_team, loser,
         result, match_time, winning_point, losing_point
     ):
@@ -31,8 +40,20 @@ class Stat:
         self.number_matches = number_matches
         self.weight = weight
         self.summary = summary
+        # Single Match Exclusive
         self.stat_flag = stat_flag
         self.tw_event = tw_event
+        # Dual Event Exclusive
+        self.official = official
+        self.comment = comment
+        self.team_one = team_one
+        self.team_one_score = team_one_score
+        self.team_two = team_two
+        self.team_two_score = team_two_score
+        # Dual Match Exclusive
+        self.team_one_point= team_one_point
+        self.team_two_point= team_two_point
+        # Match Summary Breakdown
         self.match_level = match_level
         self.round = round
         self.winning_team = winning_team
