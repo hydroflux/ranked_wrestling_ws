@@ -31,7 +31,7 @@ class Event:
         # Tournament
         self.is_tournament = is_tournament
         self.tournament_winner = tournament_winner
-        self.tournament_loser = tournament_runner_up
+        self.tournament_runner_up = tournament_runner_up
 
         Event.total_events += 1
 

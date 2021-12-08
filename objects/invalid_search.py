@@ -30,8 +30,24 @@ def record_invalid_league(browser, division, league, stats):
         number_matches='N/A',
         weight='N/A',
         summary='N/A',
+        # Single Match Exclusive
         stat_flag='N/A',
         tw_event='N/A',
+        # Tournament
+        is_tournament='N/A',
+        tournament_winner='N/A',
+        tournament_runner_up='N/A',
+        # Dual Event Exclusive
+        official='N/A',
+        comment='N/A',
+        team_one='N/A',
+        team_one_score='N/A',
+        team_two='N/A',
+        team_two_score='N/A',
+        # Dual Match Exclusive
+        team_one_point='N/A',
+        team_two_point='N/A',
+        # Match Summary Breakdown
         match_level='N/A',
         round='N/A',
         winning_team='N/A',
@@ -67,8 +83,24 @@ def record_invalid_team(browser, division, league, team, stats):
         number_matches='N/A',
         weight='N/A',
         summary='N/A',
+        # Single Match Exclusive
         stat_flag='N/A',
         tw_event='N/A',
+        # Tournament
+        is_tournament='N/A',
+        tournament_winner='N/A',
+        tournament_runner_up='N/A',
+        # Dual Event Exclusive
+        official='N/A',
+        comment='N/A',
+        team_one='N/A',
+        team_one_score='N/A',
+        team_two='N/A',
+        team_two_score='N/A',
+        # Dual Match Exclusive
+        team_one_point='N/A',
+        team_two_point='N/A',
+        # Match Summary Breakdown
         match_level='N/A',
         round='N/A',
         winning_team='N/A',
@@ -104,8 +136,24 @@ def record_invalid_event(browser, division, league, team, event, stats):
         number_matches=event.number_matches,
         weight='N/A',
         summary='N/A',
+        # Single Match Exclusive
         stat_flag='N/A',
         tw_event='N/A',
+        # Tournament
+        is_tournament=event.is_tournament,
+        tournament_winner=event.tournament_winner,
+        tournament_runner_up=event.tournament_runner_up,
+        # Dual Event Exclusive
+        official=event.official,
+        comment=event.comment,
+        team_one=event.team_one,
+        team_one_score=event.team_one_score,
+        team_two=event.team_two,
+        team_two_score=event.team_two_score,
+        # Dual Match Exclusive
+        team_one_point='N/A',
+        team_two_point='N/A',
+        # Match Summary Breakdown
         match_level='N/A',
         round='N/A',
         winning_team='N/A',
