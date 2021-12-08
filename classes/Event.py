@@ -3,12 +3,12 @@ class Event:
     total_events = 0
 
     def __init__(self, name, link, date, time, level,
-                 type=None, is_tournament=False,
-                 number_matches=0, matches=None,
+                 type=None, number_matches=0, matches=None,
                  #  Dual Event
                  official='', comment='', team_one='',
                  team_one_score='', team_two='', team_two_score='',
                  #  Tournament
+                 is_tournament=False, tournament_name='',
                  tournament_winner='', tournament_runner_up=''
         ):
         self.name = name
@@ -30,6 +30,7 @@ class Event:
 
         # Tournament
         self.is_tournament = is_tournament
+        self.tournament_name = tournament_name
         self.tournament_winner = tournament_winner
         self.tournament_runner_up = tournament_runner_up
 

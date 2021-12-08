@@ -12,7 +12,8 @@ class Stat:
         # Single Match Exclusive
         stat_flag, tw_event,
         # Tournament
-        is_tournament, tournament_winner, tournament_runner_up,
+        is_tournament, tournament_name,
+        tournament_winner, tournament_runner_up,
         # Dual Event Exclusive
         official, comment, team_one, team_two,
         team_one_score, team_two_score,
@@ -47,6 +48,7 @@ class Stat:
         self.tw_event = tw_event
         # Tournament
         self.is_tournament = is_tournament
+        self.tournament_name = tournament_name
         self.tournament_winner = tournament_winner
         self.tournament_runner_up = tournament_runner_up
         # Dual Event Exclusive

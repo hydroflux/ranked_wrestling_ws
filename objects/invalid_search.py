@@ -35,6 +35,7 @@ def record_invalid_league(browser, division, league, stats):
         tw_event='N/A',
         # Tournament
         is_tournament='N/A',
+        tournament_name='N/A',
         tournament_winner='N/A',
         tournament_runner_up='N/A',
         # Dual Event Exclusive
@@ -88,6 +89,7 @@ def record_invalid_team(browser, division, league, team, stats):
         tw_event='N/A',
         # Tournament
         is_tournament='N/A',
+        tournament_name='N/A',
         tournament_winner='N/A',
         tournament_runner_up='N/A',
         # Dual Event Exclusive
@@ -141,6 +143,7 @@ def record_invalid_event(browser, division, league, team, event, stats):
         tw_event='N/A',
         # Tournament
         is_tournament=event.is_tournament,
+        tournament_name=event.tournament_name,
         tournament_winner=event.tournament_winner,
         tournament_runner_up=event.tournament_runner_up,
         # Dual Event Exclusive
