@@ -8,17 +8,6 @@ from settings.printer import iterate_list, print_list_by_index
 from variables.general import row_class_name, row_data_tag
 
 
-def handle_match_point(match):
-    if match.point is not None:
-        print(match.point)
-        match.winning_point, match.losing_point = match.point.split('-')
-
-
-def split_match_result(match, result):
-    determine_match_results(match, result)
-    handle_match_point(match)
-
-
 def split_match_summary_information(match, match_summary):
     summary = handle_event_level(match, match_summary)
     handle_event_participants(match, summary)
