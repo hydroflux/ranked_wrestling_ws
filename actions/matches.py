@@ -43,7 +43,7 @@ def get_match_summary_information(browser):
 def add_page_matches(browser, event, match_list):
     match_summary_information = get_match_summary_information(browser)
     match_list.extend(match_summary_information)
-    print(f'Added {str(len(match_summary_information))} events to "{event.name}" team list.')
+    print(f'Added {str(len(match_summary_information))} matches to "{event.name}" event list.')
 
 
 def add_matches(browser, event, match_list):
