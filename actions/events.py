@@ -89,8 +89,10 @@ def handle_event_type(browser, division, league, team, event, stats):
     if event.type == event_types['single_event']:
         record_event_matches(browser, division, league, team, event, stats)
     elif event.type == event_types['dual_event']:
+        # record_event_dual()
         pass
     elif event.type == event_types['tournament']:
+        # record_tournament()
         pass
     else:
         print(f'Browser encountered an unknown event type of "{event.type}", please review...')

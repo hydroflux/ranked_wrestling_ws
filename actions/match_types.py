@@ -7,12 +7,26 @@ from actions.summary_breakdown import (handle_blank_participants,
                                        split_runner_up_information,
                                        split_winner_information)
 
+# handle_vs_match
+
+
+# handle_double_forfeit
+
+
+# handle_double_disqualification
+
+
+# handle_blank_participants
+
 
 def handle_standard_match(match, summary):
     split_winner_information(match, summary)
     if match.winner not in unknown_values:
         split_runner_up_information(match, summary)
     split_match_result(match)
+
+
+# handle_match_bye
 
 
 def handle_match_types(match, summary):
