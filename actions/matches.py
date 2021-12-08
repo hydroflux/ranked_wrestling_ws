@@ -6,31 +6,6 @@ from selenium_utilities.locators import locate_elements_by_class_name, locate_el
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import round_flag, unknown_values
-
-
-def check_for_round_flag(match, summary, option=None):
-    if round_flag in summary:
-        match.round = summary[: summary.index(round_flag)]
-        if option is not None:
-            return summary[(len(match.round) + 3):]
-    else:
-        return summary
-
-
-def handle_unknown_values(match, option=None):
-    unknown = unknown_values[0]
-    if option is None:
-        match.winner = unknown
-        match.winning_team = unknown
-        match.loser = unknown
-        match.losing_team = unknown
-    elif option == 'winning summary':
-        match.winner = unknown
-        match.winning_team = unknown
-    elif option == 'losing summary':
-        match.loser = unknown
-        match.losing_team = unknown
 
 
 def handle_match_point(match):
