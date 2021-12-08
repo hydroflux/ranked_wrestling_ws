@@ -4,7 +4,9 @@ class Event:
 
     def __init__(self, name, link, date, time, level,
                  type=None, is_tournament=False,
-                 number_matches=0, matches=None
+                 number_matches=0, matches=None,
+                 official='', comment='', team_one='', team_one_score='', team_two='', team_two_score=''
+
         ):
         self.name = name
         self.link = link
@@ -15,6 +17,15 @@ class Event:
         self.is_tournament = is_tournament
         self.number_matches = number_matches
         self.matches = matches
+
+        # Dual Event
+        self.official = official
+        self.comment = comment
+        self.team_one = team_one
+        self.team_one_score = team_one_score
+        self.team_two = team_two
+        self.team_two_score = team_two_score
+
 
         Event.total_events += 1
 

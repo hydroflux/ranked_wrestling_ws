@@ -6,7 +6,7 @@ class Match:
                  winning_team='', winner='', losing_team='', loser='',
                  result='', time='', point=None, winning_point='', losing_point='',
                  stat_flag='', tw_event='',
-                 official='', comment='', team_one='', team_one_score='', team_two='', team_two_score=''
+                 team_one_point='', team_two_point=''
 
     ):
         self.weight = weight
@@ -28,12 +28,8 @@ class Match:
         self.tw_event = tw_event
 
         # Dual Match
-        self.official = official
-        self.comment = comment
-        self.team_one = team_one
-        self.team_one_score = team_one_score
-        self.team_two = team_two
-        self.team_two_score = team_two_score
+        self.team_one_point = team_one_point
+        self.team_two_point = team_two_point
 
         Match.total_matches += 1
 
