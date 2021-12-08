@@ -1,10 +1,32 @@
+from classes.Match import Match
+from classes.Stat import Stat
 
-def get_event_dual_information():
+from selenium_utilities.locators import (locate_elements_by_class_name,
+                                         locate_elements_by_tag_name)
+
+from variables.general import row_class_name, row_data_tag
+
+from actions.pages import get_page_data
+
+
+def build_dual_match_information(match_information):
     pass
+
+
+def get_dual_summary_information(browser):
+    dual_summary_information = []
+    page_data = get_page_data(browser, False)
+    match_rows = locate_elements_by_class_name(page_data, row_class_name, 'match rows')
+    for row in match_rows:
+        match_information = locate_elements_by_tag_name(row, row_data_tag, "match information")
+        dual_summary_information.append(build_dual_match_information(match_information))
+    return dual_summary_information
 
 
 def add_page_dual_matches(browser, event, match_list):
-    pass
+    dual_summary_information = get_dual_summary_information(browser)
+    match_list.extend(dual_summary_information)
+    print(f'Added {str(len(dual_summary_information))} events to "{event.name}" team list.')
 
 
 # nearly identical to 'add_matches' in the 'matches' script

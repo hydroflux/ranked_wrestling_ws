@@ -115,7 +115,6 @@ def record_match_list(division, league, team, event, match_list, stats):
 
 
 def record_event_matches(browser, division, league, team, event, stats):
-    print('number_matches 1', event.number_matches)
     match_list = create_match_list(browser, event)
     update_event_matches(event, match_list)
     report_matches(team, event)
