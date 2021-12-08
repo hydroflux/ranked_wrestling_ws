@@ -65,13 +65,4 @@ def record_duals():
 
 def record_event_duals(browser, division, league, team, event, stats):
     pass
-    # General Variables
-    official = ''
-    comment = ''
-    # Team One Variables
-    team_one = ''
-    team_one_score = ''
-    # Team Two Variables
-    team_two = ''
-    team_two_score = ''
     # match_list = create_dual_match_list(browser, event)
