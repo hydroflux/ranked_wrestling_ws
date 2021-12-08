@@ -1,4 +1,4 @@
-from actions.summary_breakdown import determine_match_results, handle_event_level, handle_event_participants
+from actions.summary_breakdown import handle_event_level, handle_event_participants
 from classes.Match import Match
 from classes.Stat import Stat
 from actions.pages import get_page_data
