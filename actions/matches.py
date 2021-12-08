@@ -1,4 +1,4 @@
-from actions.summary_breakdown import handle_event_level
+from actions.summary_breakdown import determine_match_results, handle_event_level
 from classes.Match import Match
 from classes.Stat import Stat
 from actions.pages import get_page_data
@@ -7,7 +7,7 @@ from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
-from variables.matches import summary_flags, round_flag, unknown_values, participant_flags, result_options
+from variables.matches import summary_flags, round_flag, unknown_values, participant_flags
 
 
 def check_for_round_flag(match, summary, option=None):
@@ -40,50 +40,7 @@ def handle_match_point(match):
 
 
 def split_match_result(match, result):
-    if result.startswith(result_options['flag_1']):
-        match.result = result_options["value_1"]
-        match.point = result[4:]
-    elif result == result_options['flag_2']:
-        match.result = result_options['value_2']
-    elif result == result_options['flag_3']:
-        match.result = result_options['value_3']
-    elif result.startswith(result_options['flag_4']):
-        match.result = result_options['value_4']
-        match.time = result[5:]
-    elif result == result_options['flag_5']:
-        match.result = result_options['value_5']
-    elif result == result_options['flag_6']:
-        match.result = result_options['value_6']
-    elif result == result_options['flag_7']:
-        match.result = result_options['value_7']
-    elif result.startswith(result_options['flag_8']):
-        match.result = result_options['value_8']
-        match.point = result[3:]
-    elif result == result_options['flag_9']:
-        match.result = result_options['value_9']
-    elif result.startswith(result_options['flag_10']):
-        if result.startswith(result_options['flag_11']):
-            match.result = result_options['value_11']
-            match.time = result[12:]
-        else:
-            match.result = result_options['value_10']
-            match.point = result[5:]
-    elif result.startswith('flag_12'):
-        if result.startswith(result_options['flag_13']):
-            match.result = result_options['value_13']
-            match.time = result[12:]
-        else:
-            match.result = result_options['value_12']
-            match.point = result[5:]
-    elif result.startswith(result_options['flag_14']):
-        match.result = result_options['value_14']
-        match.time = result[(result.rfind(' ') + 1):]
-        match.point = result[3: result.rfind(' ')]
-    elif result.startswith(result_options['flag_15']):
-        match.result = result_options['value_15']
-        match.point = result[4:]
-    else:
-        match.result = result
+    determine_match_results(match, result)
     handle_match_point(match)
 
 
@@ -153,7 +110,7 @@ def handle_event_participants(match, summary):
         elif participant_flags['2'] in updated_winning_summary:
             match.winning_team = updated_winning_summary[(updated_winning_summary.find(participant_flags['1']) + 1): updated_winning_summary.find(participant_flags['2'])]
         handle_unknown_values(match, 'losing summary')
-        match.result = result_options["value_16"]
+        match.result = 'Bye'  # is this the appropriate place for this assignment?
 
 
 def split_match_summary_information(match, match_summary):
