@@ -1,4 +1,4 @@
-from actions.summary_breakdown import handle_event_level, handle_event_participants
+from actions.summary_breakdown import handle_blank_participants, handle_double_disqualification, handle_double_forfeit, handle_event_level, handle_event_participants, handle_match_bye, handle_standard_match, handle_vs_match
 from classes.Match import Match
 from classes.Stat import Stat
 from actions.pages import get_page_data
@@ -6,6 +6,21 @@ from selenium_utilities.locators import locate_elements_by_class_name, locate_el
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
+
+
+def handle_event_participants(match, summary):
+    if ' vs. ' in summary:
+        handle_vs_match(match, summary)
+    elif summary.endswith('Double Forfeit'):
+        handle_double_forfeit(match, summary)
+    elif summary.endswith('Double Disqualification'):
+        handle_double_disqualification(match, summary)
+    elif '[winner] over [loser]' in summary:
+        handle_blank_participants(match, summary)
+    elif ' over ' in summary:
+        handle_standard_match(match, summary)
+    elif summary.endswith(' received a bye'):
+        handle_match_bye(match, summary)
 
 
 def split_match_summary_information(match, match_summary):
