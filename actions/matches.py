@@ -6,13 +6,20 @@ from selenium_utilities.locators import (locate_elements_by_class_name,
 from settings.printer import iterate_list, print_list_by_index
 
 from variables.general import row_class_name, row_data_tag
+from variables.matches import unknown_values
 
 from actions.pages import get_page_data
 from actions.summary_breakdown import (handle_blank_participants,
                                        handle_double_disqualification,
                                        handle_double_forfeit,
-                                       handle_event_level, handle_match_bye,
-                                       handle_standard_match, handle_vs_match)
+                                       handle_event_level, handle_match_bye, handle_vs_match, split_match_result, split_runner_up_information, split_winner_information)
+
+
+def handle_standard_match(match, summary):
+    split_winner_information(match, summary)
+    if match.winner not in unknown_values:
+        split_runner_up_information(match, summary)
+    split_match_result(match)
 
 
 def handle_event_participants(match, summary):
