@@ -94,6 +94,11 @@ def handle_tournament_event_type(browser, division, league, team, event, stats):
         record_event_matches(browser, division, league, team, event, stats)
     elif event.type == event_types['dual_event']:
         record_event_duals(browser, division, league, team, event, stats)
+    else:
+        print(f'Browser encountered an unknown event type of "{event.type}" '
+              f'while searching "{event.tournament_name}" event "{event.name}", '
+              f'please review...')
+        input()
 
 
 def search_tournament_event(browser, division, league, team, event, stats):
@@ -103,16 +108,10 @@ def search_tournament_event(browser, division, league, team, event, stats):
         handle_tournament_event_type(browser, division, league, team, event, stats)
     else:
         record_invalid_event(browser, division, league, team, event, stats)
-    else:
-        print(f'Browser encountered an unknown event type of "{event.type}" '
-              f'while searching "{event.tournament_name}" event "{event.name}", '
-              f'please review...')
-        input()
-    # close_event_tab(browser)  #  Add a flag in order to aggregate 'tournaments' and 'events' together
 
 
 def record_tournament_events(browser, division, league, team, event, stats):
-    pass
+    return [search_tournament_event(browser, division, league, team, tournament_event, stats) for tournament_event in event.tournament_events]
 
 
 # 'tournaments' have the same general structure as 'events'
@@ -120,6 +119,5 @@ def record_tournament(browser, division, league, team, event, stats):
     update_event_and_tournament_information(event)
     tournament_event_list = create_tournament_event_list(browser, event)
     update_tournament_events(event, tournament_event_list)
-    # report_tournament_events(league, team, event)
-    print('Press enter to continue...')
-    input()
+    report_tournament_events(league, team, event)
+    return record_tournament_events(browser, division, league, team, event, stats)

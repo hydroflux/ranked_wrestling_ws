@@ -38,6 +38,7 @@
 ### Tournaments
 
 - [ ] Create a method of validating tournament events (particularly level, time, & date)
+- [ ] Use 'alt' flags in order to aggregate 'events' & 'tournaments' together
 
 ## Classes & Objects
 
