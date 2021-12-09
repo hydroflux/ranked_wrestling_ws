@@ -84,10 +84,8 @@ def record_stat(division, league, team, event, match, stats):
         division_abbreviation=division.division_abbreviation,
         number_leagues=division.number_leagues,
         league_name=league.name,
-        league_link=league.link,
         number_teams=league.number_teams,
         team_name=team.name,
-        team_link=team.link,
         team_abbreviation=team.abbreviation,
         number_events=team.number_events,
         event_name=event.name,
@@ -126,7 +124,10 @@ def record_stat(division, league, team, event, match, stats):
         result=match.result,
         match_time=match.time,
         winning_point=match.winning_point,
-        losing_point=match.losing_point
+        losing_point=match.losing_point,
+        # Other
+        # league_link=league.link,
+        # team_link=team.link
     )
     stats.append(stat)
 

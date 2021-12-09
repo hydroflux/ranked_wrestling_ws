@@ -5,8 +5,8 @@ class Stat:
     def __init__(
         self,
         state, division_name, division_abbreviation, number_leagues,
-        league_name, league_link, number_teams,
-        team_name, team_link, team_abbreviation, number_events,
+        league_name, number_teams,
+        team_name, team_abbreviation, number_events,
         event_name, date, time, level, type, number_matches,
         weight, summary,
         # Single Match Exclusive
@@ -22,17 +22,17 @@ class Stat:
         # Match Summary Breakdown
         match_level, round,
         winning_team, winner, losing_team, loser,
-        result, match_time, winning_point, losing_point
+        result, match_time, winning_point, losing_point,
+        # Other
+        league_link='', team_link=''
     ):
         self.state = state
         self.division_name = division_name
         self.division_abbreviation = division_abbreviation
         self.number_leagues = number_leagues
         self.league_name = league_name
-        self.league_link = league_link
         self.number_teams = number_teams
         self.team_name = team_name
-        self.team_link = team_link
         self.team_abbreviation = team_abbreviation
         self.number_events = number_events
         self.event_name = event_name
@@ -72,6 +72,9 @@ class Stat:
         self.match_time = match_time
         self.winning_point = winning_point
         self.losing_point = losing_point
+        # Other
+        self.league_link = league_link
+        self.team_link = team_link
 
         Stat.number_stats += 1
 

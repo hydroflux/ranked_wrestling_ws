@@ -25,6 +25,6 @@ def execute(headless, season, state):
     export_stats(season, division, stats)
     return browser, division, season, stats
 
-headless = False
+# headless = False
 # browser, division, season, stats = execute(headless, season, state)
 execute(headless, season, state)

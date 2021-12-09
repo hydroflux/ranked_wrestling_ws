@@ -16,10 +16,8 @@ def record_invalid_league(browser, division, league, stats):
         division_abbreviation=division.division_abbreviation,
         number_leagues=division.number_leagues,
         league_name=league.name,
-        league_link=league.link,
         number_teams=league.number_teams,
         team_name='N/A',
-        team_link='N/A',
         team_abbreviation='N/A',
         number_events='N/A',
         event_name='N/A',
@@ -59,6 +57,9 @@ def record_invalid_league(browser, division, league, stats):
         match_time='N/A',
         winning_point='N/A',
         losing_point='N/A',
+        # Other
+        # league_link=league.link,
+        # team_link='N/A'
     )
     stats.append(stat)
 
@@ -70,10 +71,8 @@ def record_invalid_team(browser, division, league, team, stats):
         division_abbreviation=division.division_abbreviation,
         number_leagues=division.number_leagues,
         league_name=league.name,
-        league_link=league.link,
         number_teams=league.number_teams,
         team_name=team.name,
-        team_link=team.link,
         team_abbreviation=team.abbreviation,
         number_events=team.number_events,
         event_name='N/A',
@@ -113,6 +112,9 @@ def record_invalid_team(browser, division, league, team, stats):
         match_time='N/A',
         winning_point='N/A',
         losing_point='N/A',
+        # Other
+        # league_link=league.link,
+        # team_link=team.link,
     )
     stats.append(stat)
 
@@ -124,10 +126,8 @@ def record_invalid_event(browser, division, league, team, event, stats):
         division_abbreviation=division.division_abbreviation,
         number_leagues=division.number_leagues,
         league_name=league.name,
-        league_link=league.link,
         number_teams=league.number_teams,
         team_name=team.name,
-        team_link=team.link,
         team_abbreviation=team.abbreviation,
         number_events=team.number_events,
         event_name=event.name,
@@ -167,5 +167,8 @@ def record_invalid_event(browser, division, league, team, event, stats):
         match_time='N/A',
         winning_point='N/A',
         losing_point='N/A',
+        # Other
+        # league_link=league.link,
+        # team_link=team.link,
     )
     stats.append(stat)
