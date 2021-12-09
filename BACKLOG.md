@@ -8,6 +8,7 @@
 - [ ] Figure out why Flake8 isn't working properly (check abstractor for settings?)
 - [ ] Add print statements for '# out of #' for each level of abstraction
 - [ ] Create a way to handle whether an event is a tournament or not in 'Matches' & the 'Stat' class
+- [ ] Create summary statements at the end of each team / league regarding remaining time / searches / etc.
 
 ## Actions
 
