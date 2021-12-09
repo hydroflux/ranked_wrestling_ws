@@ -9,7 +9,8 @@ class Event:
                  team_one_score='', team_two='', team_two_score='',
                  #  Tournament
                  is_tournament=False, tournament_name='',
-                 tournament_winner='', tournament_runner_up=''
+                 tournament_winner='', tournament_runner_up='',
+                 number_tournament_events=0
         ):
         self.name = name
         self.link = link
@@ -33,6 +34,7 @@ class Event:
         self.tournament_name = tournament_name
         self.tournament_winner = tournament_winner
         self.tournament_runner_up = tournament_runner_up
+        self.number_tournament_events = number_tournament_events
 
         Event.total_events += 1
 

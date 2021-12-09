@@ -16,11 +16,19 @@ def add_page_tournament_events(browser, team, event, tournament_event_list):
 
 
 def add_tournament_events(browser, team, event, tournament_event_list):
-    pass
+    add_page_tournament_events(browser, team, event, tournament_event_list)
+    while len(tournament_event_list) < event.number_tournament_events:
+        print('Encountered multiple tournament event pages, please review, update code, & re-start.')
+        input('Press enter to continue...')
+    return tournament_event_list
+
+
+# validate_tournament_events
 
 
 def create_tournament_event_list(browser, team, event):
-    pass
+    tournament_event_list = []
+    return add_tournament_events(browser, team, event, tournament_event_list)
 
 
 def update_tournament_events(team, event, tournament_event_list):
@@ -46,5 +54,8 @@ def record_tournament_events(browser, division, league, team, event, stats):
 # 'tournaments' have the same general structure as 'events'
 def record_tournament(browser, division, league, team, event, stats):
     update_event_and_tournament_name(event)
+    tournament_event_list = create_tournament_event_list(browser, team, event)
+    # update_tournament_events(team, event, tournament_event_list)
+    # report_tournament_events(league, team, event)
     print('Press enter to continue...')
     input()

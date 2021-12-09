@@ -35,6 +35,10 @@
 
 - [ ] Create a method to check the match headers before creating a 'Match' object
 
+### Tournaments
+
+- [ ] Create a method of validating tournament events (particularly level, time, & date)
+
 ## Classes & Objects
 
 - [ ] Create nested classes
