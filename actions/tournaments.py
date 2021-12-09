@@ -1,18 +1,31 @@
+from actions.pages import get_page_data
+from selenium_utilities.locators import locate_element_by_class_name, locate_elements_by_class_name, locate_elements_by_tag_name
+from variables.general import row_class_name, row_data_tag
+
+
 def update_event_and_tournament_name(event):
     event.tournament_name = event.name
     event.name = ''
 
 
-def build_event_link(browser, tournament_event_information):
+def build_tournament_event_link(browser, tournament_event_information):
     pass
 
 
 def get_tournament_event_links(browser):
-    pass
+    tournament_links = []
+    page_data = get_page_data(browser, False)
+    tournament_event_rows = locate_elements_by_class_name(page_data, row_class_name, 'tournament event rows')
+    for row in tournament_event_rows:
+        tournament_information = locate_elements_by_tag_name(row, row_data_tag)
+        tournament_links.append(build_tournament_event_link(browser, tournament_information))
+    return tournament_links
 
 
 def add_page_tournament_events(browser, team, event, tournament_event_list):
-    pass
+    tournament_links = get_tournament_event_links(browser)
+    tournament_event_list.extend(tournament_links)
+    print(f'Added {str(len(tournament_links))} tournament_events to the "{event.tournament_name}" tournament list.')
 
 
 def add_tournament_events(browser, team, event, tournament_event_list):
