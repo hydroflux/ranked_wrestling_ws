@@ -1,4 +1,5 @@
 from actions.pages import get_page_data
+from classes.Event import Event
 from selenium_utilities.locators import locate_element_by_class_name, locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link
 from variables.general import row_class_name, row_data_tag, link_tag_name
@@ -53,8 +54,16 @@ def create_tournament_event_list(browser, event):
     return add_tournament_events(browser, event, tournament_event_list)
 
 
-def update_tournament_events(team, event, tournament_event_list):
-    pass
+def update_tournament_events(event, tournament_event_list):
+    tournament_events = [Event(tournament_event["name"],
+                               tournament_event["link"],
+                               tournament_event["date"],
+                               tournament_event["time"],
+                               tournament_event["level"],
+                               tournament_name=event.tournament_name) for tournament_event in tournament_event_list]
+    event.tournament_events = tournament_events
+    # Below only necessary while 'count_tournament_events' is not a function
+    event.number_tournament_events = len(tournament_events)
 
 
 def report_tournament_events(league, team, event):
