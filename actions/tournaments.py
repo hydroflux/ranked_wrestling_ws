@@ -1,18 +1,20 @@
 from actions.pages import get_page_data
 from classes.Event import Event
 from selenium_utilities.locators import locate_element_by_class_name, locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
-from settings.general_functions import get_direct_link
+from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
 from variables.general import row_class_name, row_data_tag, link_tag_name
 
 
-def update_event_and_tournament_name(event):
+def update_event_and_tournament_information(event):
     event.is_tournament = True
     event.tournament_name = event.name
     event.name = ''
+    event.tournament_link = event.link
+    event.link = ''
 
 
-def build_tournament_event_link(tournament_information):
+def build_tournament_event_link(event, tournament_information):
     link_element = locate_element_by_tag_name(tournament_information[2], link_tag_name, "event link", True)
     tournament_event_link = {
         "name": link_element.text,
@@ -20,22 +22,24 @@ def build_tournament_event_link(tournament_information):
         "date": tournament_information[1].text,
         "time": tournament_information[3].text,
         "level": tournament_information[4].text,
+        "tournament_name": event.tournament_name,
+        "tournament_link": event.tournament_link
     }
     return tournament_event_link
 
 
-def get_tournament_event_links(browser):
+def get_tournament_event_links(browser, event):
     tournament_links = []
     page_data = get_page_data(browser, False)
     tournament_event_rows = locate_elements_by_class_name(page_data, row_class_name, 'tournament event rows')
     for row in tournament_event_rows:
         tournament_information = locate_elements_by_tag_name(row, row_data_tag, "tournament event information")
-        tournament_links.append(build_tournament_event_link(tournament_information))
+        tournament_links.append(build_tournament_event_link(event, tournament_information))
     return tournament_links
 
 
 def add_page_tournament_events(browser, event, tournament_event_list):
-    tournament_links = get_tournament_event_links(browser)
+    tournament_links = get_tournament_event_links(browser, event)
     tournament_event_list.extend(tournament_links)
     print(f'Added {str(len(tournament_links))} tournament_events to the "{event.tournament_name}" tournament list.')
 
@@ -62,7 +66,8 @@ def update_tournament_events(event, tournament_event_list):
                                tournament_event["date"],
                                tournament_event["time"],
                                tournament_event["level"],
-                               tournament_name=event.tournament_name) for tournament_event in tournament_event_list]
+                               tournament_name=tournament_event["tournament_name"],
+                               tournament_link=tournament_event["tournament_link"]) for tournament_event in tournament_event_list]
     event.tournament_events = tournament_events
     # Below only necessary while 'count_tournament_events' is not a function
     event.number_tournament_events = len(tournament_events)
@@ -77,7 +82,7 @@ def report_tournament_events(league, team, event):
 
 
 def open_tournament_event(browser, event):
-    pass
+    script_execution(browser, event.link)
 
 
 def search_tournament_event(browser ,division, league, team, event, stats):

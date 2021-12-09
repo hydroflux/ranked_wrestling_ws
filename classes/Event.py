@@ -8,7 +8,7 @@ class Event:
                  official='', comment='', team_one='',
                  team_one_score='', team_two='', team_two_score='',
                  #  Tournament
-                 is_tournament=False, tournament_name='',
+                 is_tournament=False, tournament_name='', tournament_link='',
                  tournament_winner='', tournament_runner_up='',
                  tournament_events='', number_tournament_events=0
         ):
@@ -32,6 +32,7 @@ class Event:
         # Tournament
         self.is_tournament = is_tournament
         self.tournament_name = tournament_name
+        self.tournament_link = tournament_link
         self.tournament_winner = tournament_winner
         self.tournament_runner_up = tournament_runner_up
         self.tournament_events = tournament_events
