@@ -116,6 +116,7 @@ def search_tournament_event(browser, division, league, team, event, stats):
         handle_tournament_event_type(browser, division, league, team, event, stats)
     else:
         record_invalid_event(browser, division, league, team, event, stats)
+    browser.back()
 
 
 def record_tournament_events(browser, division, league, team, event, stats):
