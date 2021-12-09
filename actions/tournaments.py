@@ -1,9 +1,12 @@
+from actions.duals import record_event_duals
+from actions.matches import record_event_matches
 from actions.pages import get_page_data
 from classes.Event import Event
+from objects.invalid_search import check_for_results, record_invalid_event
 from selenium_utilities.locators import locate_element_by_class_name, locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link, script_execution
 from settings.printer import iterate_list, print_list_by_index
-from variables.general import row_class_name, row_data_tag, link_tag_name
+from variables.general import row_class_name, row_data_tag, link_tag_name, event_types
 
 
 def update_event_and_tournament_information(event):
@@ -85,8 +88,27 @@ def open_tournament_event(browser, event):
     script_execution(browser, event.link)
 
 
-def search_tournament_event(browser ,division, league, team, event, stats):
-    pass
+def handle_tournament_event_type(browser, division, league, team, event, stats):
+    event.type = browser.title
+    if event.type == event_types['single_event']:
+        record_event_matches(browser, division, league, team, event, stats)
+    elif event.type == event_types['dual_event']:
+        record_event_duals(browser, division, league, team, event, stats)
+
+
+def search_tournament_event(browser, division, league, team, event, stats):
+    print(f'\nSearching "{event.name}" for matches...')
+    open_tournament_event(browser, event)
+    if check_for_results(browser):
+        handle_tournament_event_type(browser, division, league, team, event, stats)
+    else:
+        record_invalid_event(browser, division, league, team, event, stats)
+    else:
+        print(f'Browser encountered an unknown event type of "{event.type}" '
+              f'while searching "{event.tournament_name}" event "{event.name}", '
+              f'please review...')
+        input()
+    # close_event_tab(browser)  #  Add a flag in order to aggregate 'tournaments' and 'events' together
 
 
 def record_tournament_events(browser, division, league, team, event, stats):
@@ -95,9 +117,9 @@ def record_tournament_events(browser, division, league, team, event, stats):
 
 # 'tournaments' have the same general structure as 'events'
 def record_tournament(browser, division, league, team, event, stats):
-    update_event_and_tournament_name(event)
+    update_event_and_tournament_information(event)
     tournament_event_list = create_tournament_event_list(browser, event)
-    # update_tournament_events(team, event, tournament_event_list)
+    update_tournament_events(event, tournament_event_list)
     # report_tournament_events(league, team, event)
     print('Press enter to continue...')
     input()

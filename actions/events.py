@@ -95,7 +95,9 @@ def handle_event_type(browser, division, league, team, event, stats):
     elif event.type == event_types['tournament']:
         record_tournament(browser, division, league, team, event, stats)
     else:
-        print(f'Browser encountered an unknown event type of "{event.type}", please review...')
+        print(f'Browser encountered an unknown event type of "{event.type}" '
+              f'while searching "{team.name}" event "{event.name}", '
+              f'please review...')
         input()
 
 
