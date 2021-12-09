@@ -9,7 +9,7 @@ def update_event_and_tournament_name(event):
     event.name = ''
 
 
-def build_tournament_event_link(browser, tournament_information):
+def build_tournament_event_link(tournament_information):
     link_element = locate_element_by_tag_name(tournament_information[2], link_tag_name, "event link", True)
     tournament_event_link = {
         "name": link_element.text,
@@ -27,18 +27,18 @@ def get_tournament_event_links(browser):
     tournament_event_rows = locate_elements_by_class_name(page_data, row_class_name, 'tournament event rows')
     for row in tournament_event_rows:
         tournament_information = locate_elements_by_tag_name(row, row_data_tag, "tournament event information")
-        tournament_links.append(build_tournament_event_link(browser, tournament_information))
+        tournament_links.append(build_tournament_event_link(tournament_information))
     return tournament_links
 
 
-def add_page_tournament_events(browser, team, event, tournament_event_list):
+def add_page_tournament_events(browser, event, tournament_event_list):
     tournament_links = get_tournament_event_links(browser)
     tournament_event_list.extend(tournament_links)
     print(f'Added {str(len(tournament_links))} tournament_events to the "{event.tournament_name}" tournament list.')
 
 
-def add_tournament_events(browser, team, event, tournament_event_list):
-    add_page_tournament_events(browser, team, event, tournament_event_list)
+def add_tournament_events(browser, event, tournament_event_list):
+    add_page_tournament_events(browser, event, tournament_event_list)
     while len(tournament_event_list) < event.number_tournament_events:
         print('Encountered multiple tournament event pages, please review, update code, & re-start.')
         input('Press enter to continue...')
@@ -48,9 +48,9 @@ def add_tournament_events(browser, team, event, tournament_event_list):
 # validate_tournament_events
 
 
-def create_tournament_event_list(browser, team, event):
+def create_tournament_event_list(browser, event):
     tournament_event_list = []
-    return add_tournament_events(browser, team, event, tournament_event_list)
+    return add_tournament_events(browser, event, tournament_event_list)
 
 
 def update_tournament_events(team, event, tournament_event_list):
@@ -76,7 +76,7 @@ def record_tournament_events(browser, division, league, team, event, stats):
 # 'tournaments' have the same general structure as 'events'
 def record_tournament(browser, division, league, team, event, stats):
     update_event_and_tournament_name(event)
-    tournament_event_list = create_tournament_event_list(browser, team, event)
+    tournament_event_list = create_tournament_event_list(browser, event)
     # update_tournament_events(team, event, tournament_event_list)
     # report_tournament_events(league, team, event)
     print('Press enter to continue...')
