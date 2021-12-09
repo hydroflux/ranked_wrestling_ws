@@ -1,6 +1,7 @@
 from actions.pages import get_page_data
-from selenium_utilities.locators import locate_element_by_class_name, locate_elements_by_class_name, locate_elements_by_tag_name
-from variables.general import row_class_name, row_data_tag
+from selenium_utilities.locators import locate_element_by_class_name, locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
+from settings.general_functions import get_direct_link
+from variables.general import row_class_name, row_data_tag, link_tag_name
 
 
 def update_event_and_tournament_name(event):
@@ -8,8 +9,16 @@ def update_event_and_tournament_name(event):
     event.name = ''
 
 
-def build_tournament_event_link(browser, tournament_event_information):
-    pass
+def build_tournament_event_link(browser, tournament_information):
+    link_element = locate_element_by_tag_name(tournament_information[2], link_tag_name, "event link", True)
+    tournament_event_link = {
+        "name": link_element.text,
+        "link": get_direct_link(link_element),
+        "date": tournament_information[1].text,
+        "time": tournament_information[3].text,
+        "level": tournament_information[4].text,
+    }
+    return tournament_event_link
 
 
 def get_tournament_event_links(browser):
@@ -17,7 +26,7 @@ def get_tournament_event_links(browser):
     page_data = get_page_data(browser, False)
     tournament_event_rows = locate_elements_by_class_name(page_data, row_class_name, 'tournament event rows')
     for row in tournament_event_rows:
-        tournament_information = locate_elements_by_tag_name(row, row_data_tag)
+        tournament_information = locate_elements_by_tag_name(row, row_data_tag, "tournament event information")
         tournament_links.append(build_tournament_event_link(browser, tournament_information))
     return tournament_links
 
