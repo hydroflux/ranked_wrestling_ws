@@ -106,7 +106,6 @@ def record_duals_match_list(division, league, team, event, dual_match_list, stat
 
 
 def record_event_duals(browser, division, league, team, event, stats):
-    event.is_tournamnet = True
     dual_match_list = create_dual_match_list(browser, event)
     update_event_matches(event, dual_match_list)
     report_duals(team, event)

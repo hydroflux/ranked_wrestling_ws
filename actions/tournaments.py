@@ -2,10 +2,12 @@ from actions.pages import get_page_data
 from classes.Event import Event
 from selenium_utilities.locators import locate_element_by_class_name, locate_element_by_tag_name, locate_elements_by_class_name, locate_elements_by_tag_name
 from settings.general_functions import get_direct_link
+from settings.printer import iterate_list, print_list_by_index
 from variables.general import row_class_name, row_data_tag, link_tag_name
 
 
 def update_event_and_tournament_name(event):
+    event.is_tournament = True
     event.tournament_name = event.name
     event.name = ''
 
@@ -67,7 +69,11 @@ def update_tournament_events(event, tournament_event_list):
 
 
 def report_tournament_events(league, team, event):
-    pass
+    tournament_event_names = [tournament_event.name for tournament_event in event.tournament_events]
+    all_tournament_events = iterate_list(tournament_event_names)
+    print(f'{str(event.number_tournament_events)} tournament events found for the '
+          f'"{event.tournament_name}" tournament for the "{team.name}" team:')
+    print_list_by_index(all_tournament_events)
 
 
 def open_tournament_event(browser, event):

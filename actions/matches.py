@@ -67,8 +67,13 @@ def update_event_matches(event, match_list):
 def report_matches(team, event):
     match_summaries = [match.summary for match in event.matches]
     all_matches = iterate_list(match_summaries)
-    print(f'{str(event.number_matches)} matches found for the '
-          f'"{event.name}" event for the "{team.name}" team:')
+    if event.is_tournament:
+        print(f'{str(event.number_matches)} matches found for the '
+              f'"{event.name}" event for the "{event.tournament_name}" tournament for team'
+              f'"{team.name}" team:')
+    else:
+        print(f'{str(event.number_matches)} matches found for the '
+              f'"{event.name}" event for the "{team.name}" team:')
     print_list_by_index(all_matches)
 
 
