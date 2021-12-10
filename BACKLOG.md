@@ -10,6 +10,11 @@
 - [ ] Create a way to handle whether an event is a tournament or not in 'Matches' & the 'Stat' class
 - [ ] Create summary statements at the end of each team / league regarding remaining time / searches / etc.
 - [ ] Update beginning & end reporting--beginning should show what's running, end should show summary, total time, etc.
+- [ ] Add an index as a primary key to the exported file
+- [ ] Add date to the export file (run on this date, etc.)
+- [ ] Add date in the exported xlsx file (last updated this date)
+- [ ] Create multiple exports--xlsx, csv, pdf--all aggregated in a bundled folder
+- [ ] List reporting isn't displaying correctly--"index" lines are being duplicated (look at how "Double Forfeit" shows up); instead of a running count, if there are "matching" entries they're being reported as first seen--looks like what a "find" enumerator would report
 
 ## Actions
 
