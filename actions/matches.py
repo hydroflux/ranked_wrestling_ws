@@ -1,3 +1,5 @@
+from time import sleep
+
 from classes.Match import Match
 from classes.Stat import Stat
 
@@ -30,10 +32,26 @@ def build_single_match_information(match_information):
     return match
 
 
+# Nearly identical to similar 'duals' script function
+def get_match_rows(browser):
+    page_data = get_page_data(browser, False)
+    return locate_elements_by_class_name(page_data, row_class_name, 'match rows')
+
+
+# Nearly identical to similar 'duals' script function
+def access_match_rows(browser):
+    match_rows = get_match_rows(browser)
+    while match_rows is None:
+        print('Returned "NoneType" for match rows, refreshing & trying again...')
+        browser.refresh()
+        sleep(10)
+        match_rows = get_match_rows(browser)
+    return match_rows
+
+
 def get_match_summary_information(browser):
     match_summary_information = []
-    page_data = get_page_data(browser, False)
-    match_rows = locate_elements_by_class_name(page_data, row_class_name, 'match rows')
+    match_rows = access_match_rows(browser)
     for row in match_rows:
         match_information = locate_elements_by_tag_name(row, row_data_tag, "match information")
         match_summary_information.append(build_single_match_information(match_information))
