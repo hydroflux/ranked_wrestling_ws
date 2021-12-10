@@ -1,3 +1,5 @@
+from time import sleep
+
 from actions.matches import record_stat, split_match_summary_information, update_event_matches
 from classes.Match import Match
 
@@ -37,7 +39,22 @@ def determine_dual_results(event):
         print(f'Unexpected tournament results for '
               f'"{print(event)}", please review & then press enter...')
         input()
-    
+
+
+def get_match_rows(browser):
+    page_data = get_page_data(browser, False)
+    return locate_elements_by_class_name(page_data, row_class_name, 'dual match rows')
+
+
+def access_match_rows(browser):
+    match_rows = get_match_rows(browser)
+    while match_rows is None:
+        print('Returned "NoneType" for match rows, refreshing & trying again...')
+        browser.refresh()
+        sleep(10)
+        match_rows = get_match_rows(browser)
+    return match_rows
+
 
 def breakdown_dual_match_information(event, match_rows):
     while locate_element_by_tag_name(match_rows[-1], row_data_tag, 'dual event last row data').text != '':
@@ -62,8 +79,7 @@ def breakdown_dual_match_information(event, match_rows):
 
 def get_dual_summary_information(browser, event):
     dual_summary_information = []
-    page_data = get_page_data(browser, False)
-    match_rows = locate_elements_by_class_name(page_data, row_class_name, 'dual match rows')
+    match_rows = access_match_rows(browser, event)
     updated_match_rows = breakdown_dual_match_information(event, match_rows)
     for row in updated_match_rows:
         match_information = locate_elements_by_tag_name(row, row_data_tag, 'dual match information')
